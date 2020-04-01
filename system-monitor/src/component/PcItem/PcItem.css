@@ -1,16 +1,46 @@
+
 .pc-item-wrapper{
+    height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
     background-color: white;
     margin-bottom: 10px;
     background-color:white;
     border: gray;
     border-bottom: 1px;
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 3px 6px rgba(112, 112, 112, 0.23);
 }
 .pc-item-wrapper .id-box{
-    margin-top: 20px;
 }
 .pc-item-wrapper .id-box p{
     font-size: x-large;
 }
 
+.pc-item-wrapper .on-light{
+    float: left;
+    height: 100%;
+    width: 2px;
+    margin-right: 10px;
+    background-color: blue;
+}
+
+.pc-item-wrapper .off-light{
+    float: left;
+    height: 100%;
+    width: 2px;
+    margin-right: 10px;
+    background-color: gray;
+}
+
+.pc-item-wrapper .expand-button{
+    height:30px;
+    float: right;
+    font-size: 12px;
+    border: 0;
+    color: rgb(54, 54, 54);
+    width: 30%;
+    background-color: rgb(199, 199, 199);
+}
