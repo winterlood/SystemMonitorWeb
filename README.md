@@ -1,6 +1,6 @@
 # SystemMonitorWeb
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)[![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)]   (https://standardjs.com)[![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
 
 
