@@ -1,5 +1,7 @@
 # SystemMonitorWeb
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/standard/standard)
+
 [![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
 ~~~
