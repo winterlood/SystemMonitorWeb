@@ -1,5 +1,6 @@
 # SystemMonitorWeb
 
+[![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
 ~~~
 npm install --save axios
