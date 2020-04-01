@@ -1,0 +1,16 @@
+.pc-item-wrapper{
+    background-color: white;
+    margin-bottom: 10px;
+    background-color:white;
+    border: gray;
+    border-bottom: 1px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 3px 6px rgba(112, 112, 112, 0.23);
+}
+.pc-item-wrapper .id-box{
+    margin-top: 20px;
+}
+.pc-item-wrapper .id-box p{
+    font-size: x-large;
+}
+
