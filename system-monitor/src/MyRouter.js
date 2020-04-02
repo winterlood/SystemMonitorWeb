@@ -5,18 +5,20 @@ import Header from './component/Header/Header';
 import One from './component/test/One';
 import Two from './component/test/Two';
 import TotalPc from './component/TotalPc/TotalPc'
-const MyRouter =(props) =>{
+const MyRouter =({isPolling,setIsPolling}) =>{
         return(
             <Router>
-                <Header></Header>
+                <Header isPolling={isPolling} setIsPolling={setIsPolling}></Header>
                 <div className="main">
                 <Switch>
                   <Route exact path="/" component={Index} />
                   <Route path="/login" component={Index} />
                   <Route path="/one" component={One} />
                   <Route path="/two" component={Two} />
-                  <Route path="/total" component={TotalPc} />
-
+                  <Route  path="/total"
+                  render={() =>
+                      <TotalPc isPolling={isPolling} />
+                  }/>
                 </Switch>
                 </div>
           </Router>

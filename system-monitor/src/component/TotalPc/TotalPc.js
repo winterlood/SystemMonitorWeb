@@ -4,12 +4,14 @@ import PcItem from '../PcItem/PcItem'
 import One from '../test/One';
 import { Container } from 'reactstrap';
 import {getFilteredDate, plus30minute} from '../../util/time'
-const TotalPc = () => {
+const TotalPc = ({isPolling}) => {
+    const nowPolling = (isPolling === "y")? true : false;
+
     const [pcs, setPcs] = useState(null);
 
     const getPcs = () => {
         axios.get("mobile/pc")
-            .then(function (response) {
+            .then((response) => {
                 console.log(response);
                 console.log(response.data.pcs);
                 setPcs(response.data.pcs.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
@@ -59,10 +61,15 @@ const TotalPc = () => {
 
     useEffect(() => {
         getPcs();
+        const res = window.sessionStorage.getItem('isPolling');
+        // console.log("Polling State : ");
+        // console.log(isPolling);
+        // if(!isPolling)return;
         setTimeout(function run() {
-            getPcs();
-            setTimeout(run, 300000);
-        }, 300000);
+            if(res){getPcs();}
+            else{console.log("polling nagative");}
+            setTimeout(run, 30000);
+        }, 30000);
     }, [1])
 
 

@@ -38,13 +38,16 @@ const Header = (props) => {
         height:"50px",
         opacity:"80%"
     }
+    const {isPolling,setIsPolling} = props;
     return (
         <React.Fragment>
           <CssBaseline />
           <HideOnScroll {...props}>
             <AppBar style={style}>
               <Toolbar >
-                <Index></Index>
+                <Index
+                 isPolling={isPolling} setIsPolling={setIsPolling}
+                ></Index>
               </Toolbar>
             </AppBar>
           </HideOnScroll>

@@ -1,15 +1,15 @@
-import React, { Redirect } from 'react';
+import React, { Redirect , useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import './Index.css';
-import One from '../test/One';
-import Two from '../test/Two';
-const Index = () => {
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import PollingContext from '../../context/PollingContext';
+const Index = ({setIsPolling}) => {
+    const {isPolling} = useContext(PollingContext);
+
+    const handlePolling = () =>{
+          
+    }
 
     return (
         <React.Fragment>
@@ -22,8 +22,15 @@ const Index = () => {
             <div className="header-link-box">
                 <Link to="/two">CLASS</Link>
             </div>
-            <div className="header-link-box">
-                <Link to="/two">DEBUG</Link>
+            <div>
+            <FormControlLabel
+          checked={isPolling}
+          onChange={handlePolling}
+          onClick={handlePolling}
+          control={<Switch color="primary" />}
+          label="POLLING"
+          labelPlacement="start"
+        />
             </div>
         </React.Fragment>
     );

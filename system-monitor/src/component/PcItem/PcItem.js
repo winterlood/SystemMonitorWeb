@@ -9,19 +9,28 @@ class PcItem extends Component{
     
     constructor(props){
         super(props);
+        var currentDate = new Date();
+        var now = currentDate.getHours()+"시"
+        now += currentDate.getMinutes()+"분";
+        now += currentDate.getSeconds()+"초";
         this.state= {
             id : this.props.id,
             powerStatus : this.props.powerStatus,
             ramData : this.props.ramData,
             cpuData : this.props.cpuData,
             endTime : this.props.endTime,
-            isOpen : false
+            isOpen : false,
+            nowOffButtonRunning : false,
+            updateTime : now
         }
     }
 
 
     render(){
-    const {id,powerStatus,ramData,cpuData,endTime,isOpen} = this.state;
+    const {id,powerStatus,ramData,cpuData,endTime,isOpen,nowOffButtonRunning,updateTime} = this.state;
+    
+
+    
     console.log("render This!" + id);
 
     const {handleOffPc} = this.props;
@@ -45,6 +54,10 @@ class PcItem extends Component{
     }
 
     const pcOffEvent = () =>{
+        this.setState({
+            nowOffButtonRunning : true
+        })
+        document.getElementById('offButton').disable=true;
         let today = new Date();   
         var sendTime = getFilteredDate(today);
         axios.post('/mobile/pc/'+id+'/power/'+sendTime, {
@@ -58,6 +71,10 @@ class PcItem extends Component{
     }
 
     const reload = () =>{
+        var currentDate = new Date();
+        var now = currentDate.getHours()+"시"
+        now += currentDate.getMinutes()+"분";
+        now += currentDate.getSeconds()+"초";
         axios.get("pc/"+id)
             .then((response) =>{
                 console.log(response);
@@ -66,12 +83,25 @@ class PcItem extends Component{
                     powerStatus:response.data.powerStatus,
                     ramData:response.data.ramData,
                     cpuData:response.data.cpuData,
-                    endTime:response.data.endTime
+                    endTime:response.data.endTime,
+                    nowOffButtonRunning:false,
+                    updateTime:now
                 });
             })
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    const OffButtonState = () =>{
+        if(nowOffButtonRunning){
+            return (<div>현재 서버와 통신중입니다....<Spinner size="sm" color="secondary" /></div>);
+        }
+        else{
+            return (
+            <Button id="offButton" onClick={()=>pcOffEvent(id)}>OFF</Button>
+            );
+        }
     }
 
     const CollapseChild = () => {
@@ -85,10 +115,8 @@ class PcItem extends Component{
                     <Progress value={cpuData} />
 
                     <p>EndTime : {endTime}</p>
-
-                    <Button onClick={()=>pcOffEvent(id)}>OFF</Button>
+                    <OffButtonState/>
                     <Button onClick={toggle}>-</Button>
-
                 </CardBody>
             </Card>
         );
@@ -130,9 +158,9 @@ class PcItem extends Component{
                             <span className="id-span">{id}
                             </span>
                         <span className="update-log">
-                            최신 업데이트 : 2020-04-20-23
+                           UPDATED : {updateTime}
                             </span>
-                            <Spinner size="sm" color="secondary" />
+      
                         </p>
                     </div>
                     <Collapse isOpen={isOpen}>
