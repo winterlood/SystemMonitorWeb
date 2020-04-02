@@ -9,11 +9,32 @@
     background-color:white;
     border: gray;
     border-bottom: 1px;
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 3px 6px rgba(112, 112, 112, 0.23);
 }
-.pc-item-wrapper .id-box{
+button{
+    border: 0;
+    width: 100%;
+}
+
+.pc-item-wrapper .id-span{
+    font-size: 20px;
+
+}
+
+.pc-item-wrapper .update-log{
+    margin-left: 10px;
+    font-size: 11px;
+    color:gray
+}
+
+.pc-item-wrapper .pc-off-alert-box{
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .pc-item-wrapper .id-box p{
     font-size: x-large;

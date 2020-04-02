@@ -3,6 +3,7 @@ import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
 import One from '../test/One';
 import { Container } from 'reactstrap';
+import {getFilteredDate, plus30minute} from '../../util/time'
 const TotalPc = () => {
     const [pcs, setPcs] = useState(null);
 
@@ -11,32 +12,49 @@ const TotalPc = () => {
             .then(function (response) {
                 console.log(response);
                 console.log(response.data.pcs);
-
                 setPcs(response.data.pcs.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
                     (
                         <PcItem
+                            handleOffPc = {handleOffPc}
+                            handleDelayPc = {handleDelayPc}
                             id={id}
                             powerStatus={powerStatus}
                             ramData={ramData}
                             cpuData={cpuData}
+                            endTime ={endTime}
                         />
                     )));
-
-                // test = response.data.pcs.map(({powerStatus,ramData,startTime,endTime,id}) => 
-                // (
-                //     <div>
-                //         <p>{id}</p>
-                //         <p>{ramData}</p>
-                //     </div>
-                // ))
-
-                console.log("test is");
-                console.log(test);
-                // response.data.pcs.map(({})=>{})
             })
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    const postOff = (id,endTime) => {
+        axios.post('/mobile/pc/'+id+'/power/'+endTime, {
+            params: {
+              endTime: endTime
+            }
+          })
+          .then(()=>{
+            // getPcs();
+          });
+    }
+
+    const postDelay = (id,endTime) => {
+
+    }
+
+    const handleOffPc = (id) =>{
+        let today = new Date();   
+        var sendTime = getFilteredDate(today);
+        postOff(id,sendTime);
+    }
+
+
+    const handleDelayPc = (id) =>{
+        var sendTime = getFilteredDate(plus30minute());
+
     }
 
     useEffect(() => {
@@ -57,6 +75,16 @@ const TotalPc = () => {
 
     return (
         <React.Fragment>
+              <Container>
+              <PcItem
+                            handleOffPc = {handleOffPc}
+                            handleDelayPc = {handleDelayPc}
+                            id={"testId"}
+                            powerStatus={"ON"}
+                            ramData={"58.234"}
+                            cpuData={"34"}
+                        />
+            </Container>
             <Container>
                 {pcs}
             </Container>
