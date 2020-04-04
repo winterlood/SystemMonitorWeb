@@ -1,5 +1,6 @@
 .polling-state-wrapper{
-    height: 15px;
+    height: 30px;
+    padding:5px;
 }
 
 .polling-state-wrapper .text-box{

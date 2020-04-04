@@ -23,7 +23,7 @@ const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePollin
                         <AuthRoute
                             authenticated={authenticated}
                             path="/"
-                            render={props => <TotalPc user={user} isPolling={isPolling} {...props} />}
+                            render={props => <TotalPc user={user} isPolling={isPolling} handlePolling={handlePolling} {...props} />}
                         />
                         <Route path="/one" component={One} />
                         <Route path="/two" component={Two} />

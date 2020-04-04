@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './Index.css';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const Index = ({isPolling,handlePolling}) => {
  
-
+    const [check,setCheck] = useState(isPolling);
+    useEffect(()=>{
+        setCheck(isPolling);
+    },[isPolling])
     return (
         <React.Fragment>
             <div className="header-logo-box">
@@ -19,11 +22,11 @@ const Index = ({isPolling,handlePolling}) => {
             </div>
             <div>
             <FormControlLabel
-            checked={isPolling}
-          onChange={handlePolling}
-          control={<Switch color="primary" />}
-          label="POLLING"
-          labelPlacement="start"
+            checked={check}
+            onChange={handlePolling}
+            control={<Switch color="primary" />}
+            label="POLLING"
+            labelPlacement="start"
         />
             </div>
         </React.Fragment>

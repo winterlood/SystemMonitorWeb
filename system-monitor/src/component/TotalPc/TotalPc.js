@@ -4,7 +4,12 @@ import PcItem from '../PcItem/PcItem'
 import ScrollButton from '../ScrollButton/ScrollButton';
 import { Container, Spinner, Alert } from 'reactstrap';
 import './TotalPc.css'
-const TotalPc = ({ isPolling }) => {
+import ClickableText from '../ClickableText/ClickableText';
+const smallPaddingStyle = {
+    padding:"5px"
+}
+
+const TotalPc = ({ isPolling ,handlePolling}) => {
     const [pcs, setPcs] = useState(null);
 
     const getPcs = () => {
@@ -60,7 +65,7 @@ const TotalPc = ({ isPolling }) => {
     const RenderPollingState = () =>{
         if(isPolling){
             return (
-                <Alert color="success">
+                <Alert style={smallPaddingStyle} color="success">
                 <div className="polling-state-wrapper">
                     <div className="text-box">
                     실시간 업데이트 중입니다
@@ -75,10 +80,13 @@ const TotalPc = ({ isPolling }) => {
         }
         else{
             return (
-                <Alert color="dark">
+                <Alert style={smallPaddingStyle} color="dark">
                 <div className="polling-state-wrapper">
-                <div>
-                    실시간 업데이트가 꺼져있습니다
+                <div className="text-box">
+                    실시간 업데이트가 중지되었습니다.
+                </div>
+                <div className="spinner-box">
+                   <ClickableText handlePolling={handlePolling} text={"다시켜기"}/>
                 </div>
             </div>
             </Alert>

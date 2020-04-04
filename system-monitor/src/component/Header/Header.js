@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -39,6 +39,7 @@ const Header = (props) => {
         opacity:"80%"
     }
     const {isPolling,handlePolling} = props;
+
     return (
         <React.Fragment>
           <CssBaseline />
