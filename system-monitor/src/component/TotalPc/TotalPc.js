@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
 import One from '../test/One';
-import { Container } from 'reactstrap';
+import { Container, Spinner } from 'reactstrap';
 import { getFilteredDate, plus30minute } from '../../util/time'
 const TotalPc = ({ isPolling }) => {
     const [pcs, setPcs] = useState(null);
@@ -52,6 +52,7 @@ const TotalPc = ({ isPolling }) => {
         postOff(id, sendTime);
     }
 
+    
 
     const handleDelayPc = (id) => {
         var sendTime = getFilteredDate(plus30minute());
@@ -79,9 +80,24 @@ const TotalPc = ({ isPolling }) => {
         }
     }, [isPolling])
 
+
+    const RenderPollingState = () =>{
+        if(isPolling){
+            return (
+                <Spinner size="sm" color="secondary" />
+            );
+        }
+        else{
+            return (<p>현재 polling 중단</p>);
+        }
+    }
+
     return (
         <React.Fragment>
             <Container>
+                <div>
+                    <RenderPollingState/>
+                </div>
                 <PcItem
                     handleOffPc={handleOffPc}
                     handleDelayPc={handleDelayPc}
@@ -90,6 +106,8 @@ const TotalPc = ({ isPolling }) => {
                     powerStatus={"ON"}
                     ramData={"58.234"}
                     cpuData={"34"}
+                    startTime={"2020-04-04-12-12"}
+                    endTime={"2020-04-04-13-13"}
                 />
             </Container>
             <Container>

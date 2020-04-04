@@ -5,7 +5,7 @@ import Index from './component/Index/Index';
 import MyRouter from './MyRouter';
 class App extends Component {
   state = {
-    isPolling : true
+    isPolling : false
   }
   
   render() {
