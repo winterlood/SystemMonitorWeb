@@ -22,14 +22,19 @@ class PcItem extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps,prevState) {
         var currentDate = new Date();
         var now = currentDate.getHours() + "시"
         now += currentDate.getMinutes() + "분";
         now += currentDate.getSeconds() + "초";
+        var nextIsOpen = false;
+        console.log(this.state.isOpen);
+        if(this.state.isOpen){
+            nextIsOpen = true;
+        }
         this.setState({
             ...nextProps,
-            isOpen: false,
+            isOpen: nextIsOpen,
             nowOffButtonRunning: false,
             nowDelayButtonRunning : false,
             updateTime: now

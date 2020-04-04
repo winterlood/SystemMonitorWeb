@@ -1,6 +1,6 @@
 .scroll {
     opacity: 0.3;
-    background-color: blue;
+    background-color: black;
     width: 60px;
     height: 60px;
     position: fixed;
@@ -8,8 +8,8 @@
     right: 10px;
     border-radius: 30px;
     border: gray;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16), 0 6px 9px rgba(0, 0, 0, 0.23);
+    z-index: 500;
   }
   .scroll:hover {
     opacity: 1;
