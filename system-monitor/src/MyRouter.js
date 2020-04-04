@@ -13,7 +13,6 @@ const MyRouter =({saveLoginState,user, authenticated,isPolling, handlePolling}) 
                 <Header isPolling={isPolling} handlePolling={handlePolling} ></Header>
                 <div className="main">
                 <Switch>
-                  <Route exact path="/" component={Index} />
                   <Route
                     path="/login"
                     render={props => (
@@ -22,8 +21,8 @@ const MyRouter =({saveLoginState,user, authenticated,isPolling, handlePolling}) 
                   />                  
                    <AuthRoute
                     authenticated={authenticated}
-                    path="/total"
-                    render={props => <TotalPc user={user} {...props} />}
+                    path="/"
+                    render={props => <TotalPc user={user} isPolling={isPolling} {...props} />}
                   />
                   <Route path="/one" component={One} />
                   <Route path="/two" component={Two} />

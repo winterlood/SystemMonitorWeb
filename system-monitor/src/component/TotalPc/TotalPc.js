@@ -72,7 +72,7 @@ const TotalPc = ({ isPolling }) => {
         if (isPolling) {
             const intervals = setInterval(() => {
                 getPcs();
-            }, 30000);
+            }, 5000);
             return () => clearInterval(intervals);
         }
         else{
