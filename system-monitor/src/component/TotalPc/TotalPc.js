@@ -10,9 +10,15 @@ const TotalPc = ({ isPolling }) => {
     const getPcs = () => {
         axios.get("mobile/pc")
             .then((response) => {
-                console.log(response);
-                console.log(response.data.pcs);
-                setPcs(response.data.pcs.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
+                // console.log(response);
+                // console.log(response.data.pcs);
+                var sortingField = "powerStatus";
+                const sortedResponse = response.data.pcs.sort((a,b)=>{
+                    return a[sortingField] - b[sortingField];
+                })
+                console.log("정렬된 response");
+                console.log(sortedResponse);
+                setPcs(sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
                     (
                         <PcItem
                             handleOffPc={handleOffPc}
