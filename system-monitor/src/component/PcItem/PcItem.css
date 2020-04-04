@@ -13,8 +13,8 @@
     padding-left: 5px;
     padding-bottom: 5px;
     padding-right: 5px;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 3px 6px rgba(112, 112, 112, 0.23);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
 }
 button{
     border: 0;
@@ -23,7 +23,7 @@ button{
 
 .pc-item-wrapper .id-span{
     font-size: 20px;
-
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .pc-item-wrapper .update-log{
@@ -78,7 +78,7 @@ button{
     text-align: center;
     font-size: 20px;
     margin-top: -15px;
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .pc-item-wrapper .collapse-item-box{
