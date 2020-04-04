@@ -80,7 +80,7 @@ const TotalPc = ({ isPolling ,handlePolling}) => {
         }
         else{
             return (
-                <Alert style={smallPaddingStyle} color="dark">
+                <Alert style={smallPaddingStyle} color="secondary">
                 <div className="polling-state-wrapper">
                 <div className="text-box">
                     실시간 업데이트가 중지되었습니다.
