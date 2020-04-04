@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
+import ScrollButton from '../ScrollButton/ScrollButton';
 import { Container, Spinner } from 'reactstrap';
-import Fab from '@material-ui/core/Fab';
-
 const TotalPc = ({ isPolling }) => {
     const [pcs, setPcs] = useState(null);
 
@@ -70,7 +69,8 @@ const TotalPc = ({ isPolling }) => {
 
     return (
         <React.Fragment>
-            <Fab/>
+                          <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
+
             <Container>
                 <div>
                     <RenderPollingState/>
