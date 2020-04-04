@@ -1,0 +1,11 @@
+.polling-state-wrapper{
+    height: 15px;
+}
+
+.polling-state-wrapper .text-box{
+    float: left;
+}
+
+.polling-state-wrapper .spinner-box{
+    float: right;
+}

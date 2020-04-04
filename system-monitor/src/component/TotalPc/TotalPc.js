@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
 import ScrollButton from '../ScrollButton/ScrollButton';
-import { Container, Spinner } from 'reactstrap';
+import { Container, Spinner, Alert } from 'reactstrap';
+import './TotalPc.css'
 const TotalPc = ({ isPolling }) => {
     const [pcs, setPcs] = useState(null);
 
@@ -20,8 +21,8 @@ const TotalPc = ({ isPolling }) => {
                 setPcs(sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
                     (
                         <PcItem
+                        key={id}
                             id={id}
-                            key={id}
                             powerStatus={powerStatus}
                             ramData={ramData}
                             cpuData={cpuData}
@@ -59,11 +60,30 @@ const TotalPc = ({ isPolling }) => {
     const RenderPollingState = () =>{
         if(isPolling){
             return (
-                <Spinner size="sm" color="secondary" />
+                <Alert color="success">
+                <div className="polling-state-wrapper">
+                    <div className="text-box">
+                    실시간 업데이트 중입니다
+                    </div>
+                    <div className="spinner-box">
+                    <Spinner size="sm" color="secondary" />
+                    </div>
+                </div>
+                </Alert>
+
             );
         }
         else{
-            return (<p>현재 polling 중단</p>);
+            return (
+                <Alert color="dark">
+                <div className="polling-state-wrapper">
+                <div>
+                    실시간 업데이트가 꺼져있습니다
+                </div>
+            </div>
+            </Alert>
+
+            );
         }
     }
 
@@ -73,7 +93,8 @@ const TotalPc = ({ isPolling }) => {
 
             <Container>
                 <div>
-                    <RenderPollingState/>
+              
+                <RenderPollingState/>
                 </div>
                 <PcItem
                     id={"testId"}

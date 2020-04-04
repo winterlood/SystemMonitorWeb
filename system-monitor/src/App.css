@@ -9,9 +9,13 @@ a{
 }
 
 .main{
-  margin-top: 70px;
+  margin-top: 50px;
+  padding-top: 10px;
 }
 
+.main .main-wrapper{
+  margin-top: 50px;
+}
 #root{
   height: 100vh;
   background-color: rgb(245, 245, 245);
