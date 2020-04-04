@@ -139,6 +139,26 @@ class PcItem extends Component {
             }
         }
 
+        const ButtonState = () =>{
+            if(nowDelayButtonRunning || nowOffButtonRunning){
+                return(
+                    <div>현재 서버와 통신중입니다....<Spinner size="sm" color="secondary" /></div>
+                );
+            }
+            else{
+                return(
+                    <React.Fragment>
+                    <div className="collapse-item-wrapper">
+                    <DelayButtonState/>
+                    </div>
+                    <div className="collapse-item-wrapper">
+                    <OffButtonState />
+                    </div>
+                    </React.Fragment>
+                );
+            }
+        }
+
         const GetRamNotice = () => {
             if (ramData >= 90) {
                 return (
@@ -231,7 +251,6 @@ class PcItem extends Component {
 
         const getFilteredTime = (time) =>{
             const nowTime = new String(time)
-            console.log(nowTime);
             const nowSplitedTime = nowTime.split('-');
             if(nowSplitedTime.length < 4)return "정보가 없습니다";
             return (
@@ -298,12 +317,7 @@ class PcItem extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="collapse-item-wrapper">
-                        <DelayButtonState/>
-                        </div>
-                        <div className="collapse-item-wrapper">
-                        <OffButtonState />
-                        </div>
+                    <ButtonState/>
                     </CardBody>
                 </Card>
             );
