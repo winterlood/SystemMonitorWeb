@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
-import One from '../test/One';
 import { Container, Spinner } from 'reactstrap';
-import { getFilteredDate, plus30minute } from '../../util/time'
+import Fab from '@material-ui/core/Fab';
+
 const TotalPc = ({ isPolling }) => {
     const [pcs, setPcs] = useState(null);
 
@@ -21,8 +21,6 @@ const TotalPc = ({ isPolling }) => {
                 setPcs(sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
                     (
                         <PcItem
-                            handleOffPc={handleOffPc}
-                            handleDelayPc={handleDelayPc}
                             id={id}
                             key={id}
                             powerStatus={powerStatus}
@@ -35,34 +33,6 @@ const TotalPc = ({ isPolling }) => {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-    const postOff = (id, endTime) => {
-        axios.post('/mobile/pc/' + id + '/power/' + endTime, {
-            params: {
-                endTime: endTime
-            }
-        })
-            .then(() => {
-                // getPcs();
-            });
-    }
-
-    const postDelay = (id, endTime) => {
-
-    }
-
-    const handleOffPc = (id) => {
-        let today = new Date();
-        var sendTime = getFilteredDate(today);
-        postOff(id, sendTime);
-    }
-
-    
-
-    const handleDelayPc = (id) => {
-        var sendTime = getFilteredDate(plus30minute());
-
     }
 
     useEffect(() => {
@@ -100,13 +70,12 @@ const TotalPc = ({ isPolling }) => {
 
     return (
         <React.Fragment>
+            <Fab/>
             <Container>
                 <div>
                     <RenderPollingState/>
                 </div>
                 <PcItem
-                    handleOffPc={handleOffPc}
-                    handleDelayPc={handleDelayPc}
                     id={"testId"}
                     key={"testKey"}
                     powerStatus={"ON"}
@@ -115,6 +84,7 @@ const TotalPc = ({ isPolling }) => {
                     startTime={"2020-04-04-12-12"}
                     endTime={"2020-04-04-13-13"}
                 />
+             
             </Container>
             <Container>
                 {pcs}

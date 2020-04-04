@@ -1,12 +1,9 @@
-import React, { Redirect , useState, useContext} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Index.css';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const Index = ({isPolling,handlePolling}) => {
-
-    const [check,setCheck] = useState(true);
-
  
 
     return (

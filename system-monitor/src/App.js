@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getAllPcs } from './services/gets';
-import Index from './component/Index/Index';
 import MyRouter from './MyRouter';
 class App extends Component {
 

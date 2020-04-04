@@ -43,7 +43,6 @@ class PcItem extends Component {
             nowDelayButtonRunning,
             updateTime } = this.state;
         console.log("render This!" + id);
-        const { handleOffPc } = this.props;
         const Offlight = () => {
             return <div className="off-light"></div>
         }
@@ -368,9 +367,6 @@ class PcItem extends Component {
                         <Collapse isOpen={isOpen}>
                             <CollapseChild />
                         </Collapse>
-                        {/* <p>{powerStatus}</p>
-                <p>{ramData}</p>
-                <p>{cpuData}</p> */}
                     </div>
                 </Row>
             </React.Fragment>
