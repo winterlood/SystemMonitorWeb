@@ -21,10 +21,26 @@ class PcItem extends Component{
             endTime : this.props.endTime,
             isOpen : false,
             nowOffButtonRunning : false,
-            updateTime : now
+            updateTime:now
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        var currentDate = new Date();
+        var now = currentDate.getHours()+"시"
+        now += currentDate.getMinutes()+"분";
+        now += currentDate.getSeconds()+"초";
+        this.setState({
+            id : nextProps.id,
+            powerStatus : nextProps.powerStatus,
+            ramData : nextProps.ramData,
+            cpuData : nextProps.cpuData,
+            endTime : nextProps.endTime,
+            isOpen : false,
+            nowOffButtonRunning : false,
+            updateTime:now
+        })
+    }
 
     render(){
     const {id,powerStatus,ramData,cpuData,endTime,isOpen,nowOffButtonRunning,updateTime} = this.state;

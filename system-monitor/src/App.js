@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import {getAllPcs} from './services/gets';
+import { getAllPcs } from './services/gets';
 import Index from './component/Index/Index';
 import MyRouter from './MyRouter';
-import PollingContext from './context/PollingContext' 
-const App = () => {
-  const [isPolling,setIsPolling] = useState("y");
-  const handlePolling = () =>{
-    console.log("handle Polling!");
-    if(isPolling==="y"){
-      setIsPolling("n");
-    }
-    else{
-      setIsPolling("y");
-    }
+class App extends Component {
+  state = {
+    isPolling : true
   }
+  
+  render() {
+  const handlePolling = () => {
+    this.setState({
+      isPolling : !this.state.isPolling
+    })
+  };
     return (
-  <PollingContext.Provider value={true}>
-      <MyRouter isPolling={isPolling} setIsPolling={handlePolling}/>
-  </PollingContext.Provider>
-  );
+      <MyRouter 
+      isPolling={this.state.isPolling}
+      handlePolling={handlePolling} />
+    );
+  }
 }
 
 export default App;

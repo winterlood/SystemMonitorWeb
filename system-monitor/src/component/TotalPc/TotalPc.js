@@ -3,10 +3,8 @@ import axios from 'axios';
 import PcItem from '../PcItem/PcItem'
 import One from '../test/One';
 import { Container } from 'reactstrap';
-import {getFilteredDate, plus30minute} from '../../util/time'
-const TotalPc = ({isPolling}) => {
-    const nowPolling = (isPolling === "y")? true : false;
-
+import { getFilteredDate, plus30minute } from '../../util/time'
+const TotalPc = ({ isPolling }) => {
     const [pcs, setPcs] = useState(null);
 
     const getPcs = () => {
@@ -17,13 +15,14 @@ const TotalPc = ({isPolling}) => {
                 setPcs(response.data.pcs.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
                     (
                         <PcItem
-                            handleOffPc = {handleOffPc}
-                            handleDelayPc = {handleDelayPc}
+                            handleOffPc={handleOffPc}
+                            handleDelayPc={handleDelayPc}
                             id={id}
+                            key={id}
                             powerStatus={powerStatus}
                             ramData={ramData}
                             cpuData={cpuData}
-                            endTime ={endTime}
+                            endTime={endTime}
                         />
                     )));
             })
@@ -32,65 +31,66 @@ const TotalPc = ({isPolling}) => {
             });
     }
 
-    const postOff = (id,endTime) => {
-        axios.post('/mobile/pc/'+id+'/power/'+endTime, {
+    const postOff = (id, endTime) => {
+        axios.post('/mobile/pc/' + id + '/power/' + endTime, {
             params: {
-              endTime: endTime
+                endTime: endTime
             }
-          })
-          .then(()=>{
-            // getPcs();
-          });
+        })
+            .then(() => {
+                // getPcs();
+            });
     }
 
-    const postDelay = (id,endTime) => {
+    const postDelay = (id, endTime) => {
 
     }
 
-    const handleOffPc = (id) =>{
-        let today = new Date();   
+    const handleOffPc = (id) => {
+        let today = new Date();
         var sendTime = getFilteredDate(today);
-        postOff(id,sendTime);
+        postOff(id, sendTime);
     }
 
 
-    const handleDelayPc = (id) =>{
+    const handleDelayPc = (id) => {
         var sendTime = getFilteredDate(plus30minute());
 
     }
 
     useEffect(() => {
+        console.log("Total Pc Render!");
+    })
+
+    useEffect(() => {
+        console.log("useEffect!");
         getPcs();
-        const res = window.sessionStorage.getItem('isPolling');
-        // console.log("Polling State : ");
-        // console.log(isPolling);
-        // if(!isPolling)return;
-        setTimeout(function run() {
-            if(res){getPcs();}
-            else{console.log("polling nagative");}
-            setTimeout(run, 30000);
-        }, 30000);
     }, [1])
 
-
-
-    const func = (i) => {
-        console.log(i);
-    }
-    let i = 1;
-
+    useEffect(() => {
+        if (isPolling) {
+            const intervals = setInterval(() => {
+                getPcs();
+            }, 30000);
+            return () => clearInterval(intervals);
+        }
+        else{
+            console.log("Polling is stopped");
+        }
+    }, [isPolling])
 
     return (
         <React.Fragment>
-              <Container>
-              <PcItem
-                            handleOffPc = {handleOffPc}
-                            handleDelayPc = {handleDelayPc}
-                            id={"testId"}
-                            powerStatus={"ON"}
-                            ramData={"58.234"}
-                            cpuData={"34"}
-                        />
+            <Container>
+                <PcItem
+                    handleOffPc={handleOffPc}
+                    handleDelayPc={handleDelayPc}
+                    id={"testId"}
+                    key={"testKey"}
+                    powerStatus={"ON"}
+                    ramData={"58.234"}
+                    cpuData={"34"}
+                />
             </Container>
             <Container>
                 {pcs}

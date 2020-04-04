@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 import './Index.css';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import PollingContext from '../../context/PollingContext';
-const Index = ({setIsPolling}) => {
-    const {isPolling} = useContext(PollingContext);
+const Index = ({isPolling,handlePolling}) => {
 
-    const handlePolling = () =>{
-          
-    }
+    const [check,setCheck] = useState(true);
+
+ 
 
     return (
         <React.Fragment>
@@ -24,9 +22,8 @@ const Index = ({setIsPolling}) => {
             </div>
             <div>
             <FormControlLabel
-          checked={isPolling}
+            checked={isPolling}
           onChange={handlePolling}
-          onClick={handlePolling}
           control={<Switch color="primary" />}
           label="POLLING"
           labelPlacement="start"
