@@ -4,20 +4,55 @@ import { getAllPcs } from './services/gets';
 import Index from './component/Index/Index';
 import MyRouter from './MyRouter';
 class App extends Component {
-  state = {
-    isPolling : false
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: 'null',
+      authenticated: false,
+      isPollin: false
+    }
   }
-  
+
+  componentDidMount() {
+    const sessionUser = window.sessionStorage.getItem('user');
+    const sessionAuth = window.sessionStorage.getItem('auth');
+    if (sessionUser) {
+      this.setState({
+        user: sessionUser,
+        authenticated: sessionAuth
+      })
+    }
+  }
+
   render() {
-  const handlePolling = () => {
-    this.setState({
-      isPolling : !this.state.isPolling
-    })
-  };
+    const saveLoginState = (email) => {
+      this.setState({
+        user: email,
+        authenticated: true
+      })
+      window.sessionStorage.setItem('user', email);
+      window.sessionStorage.setItem('auth', true);
+    }
+    const logout = () => {
+      this.setState({
+        user : null,
+        authenticated :false
+      })
+      window.sessionStorage.clear();
+    }
+    const handlePolling = () => {
+      this.setState({
+        isPolling: !this.state.isPolling
+      })
+    };
     return (
-      <MyRouter 
-      isPolling={this.state.isPolling}
-      handlePolling={handlePolling} />
+      <MyRouter
+        authenticated={this.state.authenticated} 
+        saveLoginState={saveLoginState} 
+        logout={logout}
+        isPolling={this.state.isPolling}
+        handlePolling={handlePolling} />
     );
   }
 }
