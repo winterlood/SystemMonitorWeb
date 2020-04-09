@@ -1,63 +1,69 @@
-
-.pc-item-wrapper{
-    height: auto;
-    margin-left: 10px;
-    margin-right: 10px;
+.PcItem {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 10px;
+    height: 65px;
+}
+.pc-item-wrapper {
+    overflow: hidden;
+    height: 100%;
     width: 100%;
     background-color: white;
-    margin-bottom: 10px;
-    background-color:white;
+    background-color: white;
     border: gray;
     border-bottom: 1px;
-    padding-top: 10px;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    padding-right: 5px;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
 }
-button{
+
+.PcItem .pc-item-box {
+    margin-left: 12px;
+    padding-top: 10px;
+    padding-left: 12px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+.PcItem button {
     border: 0;
     width: 100%;
 }
 
-.pc-item-wrapper .id-span{
+.PcItem .id-span {
     font-size: 20px;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
-.pc-item-wrapper .update-log{
+.PcItem .update-log {
     margin-left: 10px;
     font-size: 11px;
-    color:gray
+    color: gray;
 }
 
-.pc-item-wrapper .pc-off-alert-box{
+.PcItem .pc-off-alert-box {
     padding-left: 10px;
     padding-right: 10px;
 }
-.pc-item-wrapper .id-box p{
+.PcItem .id-box p {
     font-size: x-large;
 }
 
-.pc-item-wrapper .on-light{
+.PcItem .on-light {
     float: left;
     height: 100%;
-    width: 2px;
-    margin-right: 10px;
-    background-color: blue;
+    width: 12px;
+    background-color: rgb(105, 105, 238);
 }
 
-.pc-item-wrapper .off-light{
+.PcItem .off-light {
     float: left;
     height: 100%;
-    width: 2px;
+    width: 12px;
     margin-right: 10px;
     background-color: gray;
 }
 
-.pc-item-wrapper .expand-button{
-    height:30px;
+.PcItem .expand-button {
+    height: 30px;
     float: right;
     font-size: 12px;
     border: 0;
@@ -66,61 +72,63 @@ button{
     background-color: rgb(199, 199, 199);
 }
 
- 
-.pc-item-wrapper .info-text-box{
-    color:gray;
+.PcItem .info-text-box {
+    color: gray;
     text-align: center;
     font-size: 12px;
 }
 
-.pc-item-wrapper .value-text-box{
+.PcItem .value-text-box {
     width: 100%;
     text-align: center;
     font-size: 20px;
     margin-top: -15px;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
-.pc-item-wrapper .collapse-item-box{
+.pc-detail-wrapper {
+    width: 100%;
+}
+
+.PcItem .collapse-item-box {
     overflow: hidden;
 }
 
-.pc-item-wrapper .collapse-item-wrapper{
+.PcItem .collapse-item-wrapper {
     margin-bottom: 20px;
-
 }
 
-.pc-item-wrapper .usage-over-90{
+.PcItem .usage-over-90 {
     color: rgb(236, 104, 104);
     font-size: 10px;
     text-align: center;
 }
-.pc-item-wrapper .usage-over-70{
+.PcItem .usage-over-70 {
     color: rgb(238, 133, 92);
     font-size: 10px;
     text-align: center;
 }
-.pc-item-wrapper .usage-over-50{
+.PcItem .usage-over-50 {
     color: rgb(126, 126, 126);
     font-size: 10px;
     text-align: center;
 }
-.pc-item-wrapper .usage-over-30{
+.PcItem .usage-over-30 {
     color: rgb(144, 144, 144);
     font-size: 10px;
     text-align: center;
 }
-.pc-item-wrapper .usage-over-10{
+.PcItem .usage-over-10 {
     color: rgb(52, 55, 240);
     font-size: 10px;
     text-align: center;
 }
-.pc-item-wrapper .usage-over-0{
+.PcItem .usage-over-0 {
     color: rgb(141, 141, 141);
     font-size: 10px;
     text-align: center;
 }
 
-.pc-item-wrapper .data-progress-box{
+.PcItem .data-progress-box {
     margin-bottom: 10px;
 }

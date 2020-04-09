@@ -395,20 +395,24 @@ class PcItem extends Component {
 
         return (
             <React.Fragment>
-                <Row>
+                <div className="PcItem">
                     <div className="pc-item-wrapper">
                         <Powerlight />
-                        <div onClick={toggle} className="id-box">
-                            <p>
-                                <span className="id-span">{id}</span>
-                                <span className="update-log">UPDATED : {updateTime}</span>
-                            </p>
+                        <div className="pc-item-box">
+                            <div onClick={toggle} className="id-box">
+                                <p>
+                                    <span className="id-span">{id}</span>
+                                    <span className="update-log">UPDATED : {updateTime}</span>
+                                </p>
+                            </div>
                         </div>
+                    </div>
+                    <div className="pc-detail-wrapper">
                         <Collapse isOpen={isOpen}>
                             <CollapseChild />
                         </Collapse>
                     </div>
-                </Row>
+                </div>
             </React.Fragment>
         );
     }
