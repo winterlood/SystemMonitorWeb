@@ -10,9 +10,7 @@ const restLink = new RestLink({ uri: "http://13.125.208.19/" });
 const client = new ApolloClient({
     link: restLink,
     cache: new InMemoryCache(),
-    fetchOptions: {
-        mode: "no-cors",
-    },
+    fetchOptions: { mode: "no-cors" },
 });
 
 class App extends Component {
