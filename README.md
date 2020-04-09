@@ -1,28 +1,21 @@
 # SystemMonitorWeb
 
-![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)  [![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
+![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg) [![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
-
-NPM
----
-~~~
+```
 npm install --save axios
-~~~
+```
 
-~~~
+```
 npm install --save bootstrap
 
 npm install --save reactstrap react react-dom
-~~~
+```
 
-~~~
+```
 npm install @material-ui/core
-~~~
+```
 
-
-API END Point
----
-~~~
-: GET ~/mobile/login
-~~~
-
+```
+npm install apollo-link-rest apollo-link graphql graphql-anywhere qs --save
+```

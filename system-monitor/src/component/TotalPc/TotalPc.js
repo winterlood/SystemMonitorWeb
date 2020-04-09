@@ -1,108 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import PcItem from '../PcItem/PcItem'
-import ScrollButton from '../ScrollButton/ScrollButton';
-import { Container, Spinner, Alert } from 'reactstrap';
-import './TotalPc.css'
-import ClickableText from '../ClickableText/ClickableText';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PcItem from "../PcItem/PcItem";
+import ScrollButton from "../ScrollButton/ScrollButton";
+import { Container, Spinner, Alert } from "reactstrap";
+import "./TotalPc.css";
+import ClickableText from "../ClickableText/ClickableText";
 const smallPaddingStyle = {
-    padding:"5px"
-}
+    padding: "5px",
+};
 
-const TotalPc = ({ isPolling ,handlePolling}) => {
+const TotalPc = ({ isPolling, handlePolling }) => {
     const [pcs, setPcs] = useState(null);
 
     const getPcs = () => {
-        axios.get("mobile/pc")
+        axios
+            .get("mobile/pc")
             .then((response) => {
                 // console.log(response);
                 // console.log(response.data.pcs);
                 var sortingField = "powerStatus";
-                const sortedResponse = response.data.pcs.sort((a,b)=>{
+                const sortedResponse = response.data.pcs.sort((a, b) => {
                     return a[sortingField] - b[sortingField];
-                })
+                });
                 console.log("정렬된 response");
                 console.log(sortedResponse);
-                setPcs(sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) =>
-                    (
+                setPcs(
+                    sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) => (
                         <PcItem
-                        key={id}
+                            key={id}
                             id={id}
                             powerStatus={powerStatus}
                             ramData={ramData}
                             cpuData={cpuData}
                             endTime={endTime}
                         />
-                    )));
+                    ))
+                );
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    };
 
     useEffect(() => {
         console.log("Total Pc Render!");
-    })
+    });
 
     useEffect(() => {
         console.log("useEffect!");
         getPcs();
-    }, [1])
+    }, [1]);
 
     useEffect(() => {
         if (isPolling) {
             const intervals = setInterval(() => {
                 getPcs();
-            }, 5000);
+            }, 30000);
             return () => clearInterval(intervals);
-        }
-        else{
+        } else {
             console.log("Polling is stopped");
         }
-    }, [isPolling])
+    }, [isPolling]);
 
-
-    const RenderPollingState = () =>{
-        if(isPolling){
+    const RenderPollingState = () => {
+        if (isPolling) {
             return (
                 <Alert style={smallPaddingStyle} color="success">
-                <div className="polling-state-wrapper">
-                    <div className="text-box">
-                    실시간 업데이트 중입니다
+                    <div className="polling-state-wrapper">
+                        <div className="text-box">실시간 업데이트 중입니다</div>
+                        <div className="spinner-box">
+                            <Spinner size="sm" color="secondary" />
+                        </div>
                     </div>
-                    <div className="spinner-box">
-                    <Spinner size="sm" color="secondary" />
-                    </div>
-                </div>
                 </Alert>
-
             );
-        }
-        else{
+        } else {
             return (
                 <Alert style={smallPaddingStyle} color="secondary">
-                <div className="polling-state-wrapper">
-                <div className="text-box">
-                    실시간 업데이트가 중지되었습니다.
-                </div>
-                <div className="spinner-box">
-                   <ClickableText handlePolling={handlePolling} text={"다시켜기"}/>
-                </div>
-            </div>
-            </Alert>
-
+                    <div className="polling-state-wrapper">
+                        <div className="text-box">실시간 업데이트가 중지되었습니다.</div>
+                        <div className="spinner-box">
+                            <ClickableText handlePolling={handlePolling} text={"다시켜기"} />
+                        </div>
+                    </div>
+                </Alert>
             );
         }
-    }
+    };
 
     return (
         <React.Fragment>
-                          <ScrollButton scrollStepInPx="50" delayInMs="16.66"/>
-
+            <ScrollButton scrollStepInPx="50" delayInMs="16.66" />
             <Container>
                 <div>
-              
-                <RenderPollingState/>
+                    <RenderPollingState />
                 </div>
                 <PcItem
                     id={"testId"}
@@ -113,13 +104,10 @@ const TotalPc = ({ isPolling ,handlePolling}) => {
                     startTime={"2020-04-04-12-12"}
                     endTime={"2020-04-04-13-13"}
                 />
-             
             </Container>
-            <Container>
-                {pcs}
-            </Container>
+            <Container>{pcs}</Container>
         </React.Fragment>
     );
-}
+};
 
 export default TotalPc;
