@@ -14,6 +14,7 @@
     width: 100%;
     overflow: hidden;
     border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
 }
 
 .PcItem .pc-item-box {
