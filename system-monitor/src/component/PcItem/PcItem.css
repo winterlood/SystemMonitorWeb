@@ -2,18 +2,18 @@
     margin-left: 2px;
     margin-right: 2px;
     margin-bottom: 10px;
-    height: 65px;
-}
-.pc-item-wrapper {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    background-color: white;
     background-color: white;
     border: gray;
     border-bottom: 1px;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+.pc-item-wrapper {
+    overflow: hidden;
+    height: 65px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
 }
 
 .PcItem .pc-item-box {
