@@ -6,6 +6,8 @@
 npm install --save axios
 ```
 
+> maybe this will replace apollo
+
 ```
 npm install --save bootstrap
 
@@ -17,5 +19,13 @@ npm install @material-ui/core
 ```
 
 ```
-npm install apollo-link-rest apollo-link graphql graphql-anywhere qs --save
+npm install --save apollo-client
+
+npm install --save apollo-cache-inmemory
+
+npm install --save apollo-link-rest apollo-link graphql graphql-anywhere qs
+```
+
+```
+npm install --save graphql-tag
 ```
