@@ -1,0 +1,36 @@
+.ClassItem {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: gray;
+    border-bottom: 1px;
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+
+.ClassItem .class-item-wrapper {
+    height: 180px;
+}
+
+.class-item-wrapper .class-main {
+    float: left;
+    height: 100%;
+    width: 100%;
+    margin-right: -30px;
+    background-color: red;
+}
+
+.class-item-wrapper .class-side {
+    float: right;
+    height: 100%;
+    width: 30px;
+    background-color: black;
+    color: gray;
+}
+
+.class-side .class-go-to-box {
+    height: 100%;
+    font-size: 50px;
+    vertical-align: middle;
+}
