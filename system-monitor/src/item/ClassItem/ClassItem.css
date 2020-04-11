@@ -1,36 +1,83 @@
 .ClassItem {
-    margin-left: 2px;
-    margin-right: 2px;
+    overflow: hidden;
     margin-bottom: 10px;
     background-color: white;
     border: gray;
     border-bottom: 1px;
-    border-radius: 1px;
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
 }
 
 .ClassItem .class-item-wrapper {
-    height: 180px;
+    height: 70px;
 }
 
-.class-item-wrapper .class-main {
+.class-item-wrapper .class-id-box-outer {
+    background-color: rgb(221, 221, 221);
+    line-height: 70px;
+    height: 100%;
     float: left;
-    height: 100%;
-    width: 100%;
-    margin-right: -30px;
-    background-color: red;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
-.class-item-wrapper .class-side {
+.class-item-wrapper .class-id-box-inner {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    font-size: 25px;
+    color: rgb(93, 93, 93);
+}
+
+.class-item-wrapper .class-power-status-wrapper {
+    padding-right: 20px;
     float: right;
-    height: 100%;
-    width: 30px;
-    background-color: black;
-    color: gray;
 }
 
-.class-side .class-go-to-box {
+.class-item-wrapper .class-on-box-outer {
+    margin-left: 10px;
+    /* background-color: rgb(224, 224, 224); */
+    line-height: 70px;
     height: 100%;
-    font-size: 50px;
-    vertical-align: middle;
+    float: left;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.class-on-box-outer .class-on-circle {
+    float: left;
+    margin-top: 27px;
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    background-color: rgb(83, 218, 83);
+    border-radius: 10px;
+}
+
+.class-item-wrapper .class-off-box-outer {
+    margin-left: 10px;
+    /* background-color: rgb(224, 224, 224); */
+    line-height: 70px;
+    height: 100%;
+    float: left;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.class-off-box-outer .class-off-circle {
+    float: left;
+    margin-top: 27px;
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    background-color: rgb(189, 189, 189);
+    border-radius: 10px;
+}
+
+.class-item-wrapper .class-update-log-outer {
+    margin-left: 10px;
+    line-height: 70px;
+    float: left;
+}
+
+.class-update-log-outer .class-update-log-inner {
+    color: gray;
+    font-size: 13px;
 }

@@ -140,7 +140,7 @@ export default function Header() {
                 </div>
                 <Divider />
                 <List>
-                    <Link to="/total">
+                    <Link to="/total" onClick={handleDrawerClose}>
                         <ListItem button key="Total">
                             <ListItemIcon>
                                 <InboxIcon />
@@ -148,7 +148,7 @@ export default function Header() {
                             <ListItemText primary="Total" />
                         </ListItem>
                     </Link>
-                    <Link to="/class">
+                    <Link to="/class" onClick={handleDrawerClose}>
                         <ListItem button key="Class">
                             <ListItemIcon>
                                 <InboxIcon />

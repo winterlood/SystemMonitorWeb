@@ -8,6 +8,8 @@ const ClassViewPage = () => {
             <div className="main-wrapper">
                 <Container>
                     <ClassItem />
+                    <ClassItem />
+                    <ClassItem />
                 </Container>
             </div>
         </React.Fragment>
