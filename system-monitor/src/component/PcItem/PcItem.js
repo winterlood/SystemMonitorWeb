@@ -79,7 +79,7 @@ class PcItem extends Component {
             let today = new Date();
             var sendTime = getFilteredDate(today);
             axios
-                .post("/mobile/pc/" + id + "/power/" + sendTime, {
+                .post("http://13.125.208.19//mobile/pc/" + id + "/power/" + sendTime, {
                     params: {
                         endTime: sendTime,
                         powerStatus: "OFF",
@@ -100,7 +100,7 @@ class PcItem extends Component {
             let today = new Date();
             var sendTime = getFilteredDate(plus30minute());
             axios
-                .post("/mobile/pc/" + id + "/power/" + sendTime, {
+                .post("http://13.125.208.19//mobile/pc/" + id + "/power/" + sendTime, {
                     params: {
                         endTime: sendTime,
                     },
@@ -126,7 +126,7 @@ class PcItem extends Component {
             now += currentDate.getMinutes() + "분";
             now += currentDate.getSeconds() + "초";
             axios
-                .get("pc/" + id)
+                .get("http://13.125.208.19/pc/" + id)
                 .then((response) => {
                     console.log("Reload Success!");
                     console.log(response);

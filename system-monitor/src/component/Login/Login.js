@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Container } from 'reactstrap';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import {Link, Redirect} from 'react-router-dom';
-import './Login.css';
+import React, { useState } from "react";
+import { Container } from "reactstrap";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
+import "./Login.css";
 const Login = ({ saveLoginState, authenticated, location }) => {
-    const [id,setId] = useState('');
-    const [pw,setPw] = useState('');
+    const [id, setId] = useState("");
+    const [pw, setPw] = useState("");
     const { from } = location.state || { from: { pathname: "/" } };
     if (authenticated) return <Redirect to={from} />;
+
     return (
         <Container>
             <div className="login-wrapper">
@@ -22,30 +24,38 @@ const Login = ({ saveLoginState, authenticated, location }) => {
                             <div className="input-box-sizing">
                                 <TextField
                                     value={id}
-                                    onChange={({target:{value}})=>setId(value)}
+                                    onChange={({ target: { value } }) => setId(value)}
                                     size="small"
-                                    id="outlined-basic" label="ID" variant="outlined" />
+                                    id="outlined-basic"
+                                    label="ID"
+                                    variant="outlined"
+                                />
                             </div>
                         </div>
                         <div className="pw-box">
                             <div className="input-box-sizing">
                                 <TextField
                                     value={pw}
-                                    onChange={({target:{value}})=>setPw(value)}
+                                    onChange={({ target: { value } }) => setPw(value)}
                                     size="small"
-                                    id="outlined-basic" label="PW" variant="outlined" />
+                                    id="outlined-basic"
+                                    label="PW"
+                                    variant="outlined"
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="submit-box">
                         <div className="button-box">
-                            <Button 
-                            onClick={()=>{
-                                if(id.length < 1) return;
-                                if(pw.length < 1) return;
-                                saveLoginState(id);
-                            }}
-                            variant="contained" color="primary">
+                            <Button
+                                onClick={() => {
+                                    if (id.length < 1) return;
+                                    if (pw.length < 1) return;
+                                    saveLoginState(id);
+                                }}
+                                variant="contained"
+                                color="primary"
+                            >
                                 Login
                             </Button>
                         </div>
@@ -53,11 +63,10 @@ const Login = ({ saveLoginState, authenticated, location }) => {
                             <Link>비밀번호를 잊으셨나요?</Link>
                         </div>
                     </div>
-
                 </Container>
             </div>
         </Container>
     );
-}
+};
 
 export default Login;

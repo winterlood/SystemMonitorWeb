@@ -16,15 +16,12 @@ const TotalPc = ({ isPolling, handlePolling }) => {
 
     const getPcs = () => {
         axios
-            .get("mobile/pc")
+            .get("http://13.125.208.19/mobile/pc")
             .then((response) => {
                 // console.log(response);
                 // console.log(response.data.pcs);
-                var sortingField = "powerStatus";
-                const sortedResponse = response.data.pcs.sort((a, b) => {
-                    return a[sortingField] - b[sortingField];
-                });
-                const filterOn = sortedResponse.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
+                var pcsData = response.data.pcs;
+                const filterOn = pcsData.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
                 setOnPcs(
                     filterOn.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) => (
                         <PcItem
@@ -37,7 +34,7 @@ const TotalPc = ({ isPolling, handlePolling }) => {
                         />
                     ))
                 );
-                const filterOff = sortedResponse.filter((it) => it.powerStatus === "OFF" || it.powerStatus === "Off");
+                const filterOff = pcsData.filter((it) => it.powerStatus === "OFF" || it.powerStatus === "Off");
                 setOffPcs(
                     filterOff.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) => (
                         <PcItem
@@ -51,7 +48,7 @@ const TotalPc = ({ isPolling, handlePolling }) => {
                     ))
                 );
                 setPcs(
-                    sortedResponse.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) => (
+                    pcsData.map(({ powerStatus, ramData, cpuData, startTime, endTime, id }) => (
                         <PcItem
                             key={id}
                             id={id}
