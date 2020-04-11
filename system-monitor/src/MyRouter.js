@@ -8,6 +8,7 @@ import TotalPc from "./component/TotalPc/TotalPc";
 import Login from "./component/Login/Login";
 import AuthRoute from "./component/AuthRoute/AutheRoute";
 import ApolloTest from "./component/ApolloTest/ApolloTest";
+import ClassViewPage from "pages/ClassViewPage/ClassViewPage";
 const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePolling }) => {
     return (
         <Router>
@@ -24,13 +25,13 @@ const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePollin
                         />
                         <AuthRoute
                             authenticated={authenticated}
-                            path="/"
+                            path="/total"
                             render={(props) => (
                                 <TotalPc user={user} isPolling={isPolling} handlePolling={handlePolling} {...props} />
                             )}
                         />
                         <Route path="/one" component={One} />
-                        <Route path="/two" component={Two} />
+                        <Route path="/class" component={ClassViewPage} />
                         {/* <Route  path="/total"
                   render={() =>
                       <TotalPc isPolling={isPolling}  />

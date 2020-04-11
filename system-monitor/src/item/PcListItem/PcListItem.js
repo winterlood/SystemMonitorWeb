@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./PcItem.css";
+import "./PcListItem.css";
 import { Spinner, Alert, Progress, Collapse, Button, CardBody, Card } from "reactstrap";
 import axios from "axios";
 import { getFilteredDate, plus30minute } from "../../util/time";
-class PcItem extends Component {
+class PcListItem extends Component {
     //({handleOffPc,handleDelayPc, id, powerStatus, ramData, cpuData, endTime })
 
     constructor(props) {
@@ -78,19 +78,42 @@ class PcItem extends Component {
             });
             let today = new Date();
             var sendTime = getFilteredDate(today);
+
+            let form = new FormData();
+            form.append("endTime", sendTime);
+            form.append("powerStatus", "OFF");
+            let url = "http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime + "/";
+            console.log(url);
+
             axios
-                .post("http://13.125.208.19//mobile/pc/" + id + "/power/" + sendTime, {
-                    params: {
-                        endTime: sendTime,
-                        powerStatus: "OFF",
-                    },
-                })
-                .then(() => {
+                .post(
+                    url,
+                    { endTime: sendTime, powerStatus: "OFF" },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+                .then((response) => {
                     reload();
                 })
                 .catch((error) => {
                     postError();
                 });
+            // axios
+            //     .post("http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime, {
+            //         data: {
+            //             endTime: sendTime,
+            //             powerStatus: "OFF",
+            //         },
+            //     })
+            //     .then(() => {
+            //         reload();
+            //     })
+            //     .catch((error) => {
+            //         postError();
+            //     });
         };
 
         const pcDelay = () => {
@@ -99,18 +122,56 @@ class PcItem extends Component {
             });
             let today = new Date();
             var sendTime = getFilteredDate(plus30minute());
+            let url = "http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime + "/";
+            console.log(url);
             axios
-                .post("http://13.125.208.19//mobile/pc/" + id + "/power/" + sendTime, {
-                    params: {
-                        endTime: sendTime,
-                    },
-                })
-                .then(() => {
+                .post(
+                    url,
+                    { endTime: sendTime },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
+                .then((response) => {
                     reload();
                 })
                 .catch((error) => {
                     postError();
                 });
+
+            // axios
+            //     .post("http://13.125.209.19/mobile/pc" + id + "/power" + sendTime, {
+            //         // body: {
+            //         //     endTime: sendTime,
+            //         // },
+
+            //         data: { endTime: sendTime },
+
+            //         // headers: {
+            //         //     "Content-Type": "application/json;charset=UTF-8",
+            //         // },
+            //     })
+            //     .then((response) => {
+            //         console.log(response);
+            //         reload();
+            //     })
+            //     .catch((error) => {
+            //         postError();
+            //     });
+            // axios
+            //     .post("http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime, {
+            //         data: {
+            //             endTime: sendTime,
+            //         },
+            //     })
+            //     .then(() => {
+            //         reload();
+            //     })
+            //     .catch((error) => {
+            //         postError();
+            //     });
         };
 
         const postError = () => {
@@ -126,7 +187,7 @@ class PcItem extends Component {
             now += currentDate.getMinutes() + "분";
             now += currentDate.getSeconds() + "초";
             axios
-                .get("http://13.125.208.19/pc/" + id)
+                .get("http://13.125.208.19/mobile/pc/" + id + "/data")
                 .then((response) => {
                     console.log("Reload Success!");
                     console.log(response);
@@ -413,4 +474,4 @@ class PcItem extends Component {
     }
 }
 
-export default PcItem;
+export default PcListItem;
