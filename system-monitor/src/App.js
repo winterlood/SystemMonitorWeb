@@ -1,18 +1,6 @@
 import React, { Component } from "react";
-import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider } from "react-apollo";
-import { RestLink } from "apollo-link-rest";
 import "./App.css";
 import MyRouter from "./MyRouter";
-const restLink = new RestLink({ uri: "http://13.125.208.19/" });
-
-const client = new ApolloClient({
-    link: restLink,
-    cache: new InMemoryCache(),
-    fetchOptions: { mode: "no-cors" },
-});
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -66,9 +54,4 @@ class App extends Component {
         );
     }
 }
-const ApolloApp = () => (
-    <ApolloProvider client={client}>
-        <App />
-    </ApolloProvider>
-);
-export default ApolloApp;
+export default App;

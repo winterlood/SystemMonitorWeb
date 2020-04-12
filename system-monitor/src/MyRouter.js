@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Index from "./component/Index/Index";
 // import Header from "./component/Header/Header";
 import One from "./component/test/One";
 import Two from "./component/test/Two";
 import TotalPc from "./component/TotalPc/TotalPc";
 import Login from "./component/Login/Login";
 import AuthRoute from "./component/AuthRoute/AutheRoute";
-import ApolloTest from "./component/ApolloTest/ApolloTest";
 import ClassViewPage from "pages/ClassViewPage/ClassViewPage";
+import ClassGridPage from "pages/ClassGridPage/ClassGridPage";
 import Header from "module/Header/Header";
 const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePolling }) => {
     return (
@@ -19,7 +18,6 @@ const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePollin
 
                 <div className="main-wrapper">
                     <Switch>
-                        <Route path="/apollo" component={ApolloTest}></Route>
                         <Route
                             path="/login"
                             render={(props) => (
@@ -34,7 +32,9 @@ const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePollin
                             )}
                         />
                         <Route path="/one" component={One} />
+                        <Route path="/class/:classId" component={ClassGridPage} />
                         <Route path="/class" component={ClassViewPage} />
+
                         {/* <Route  path="/total"
                   render={() =>
                       <TotalPc isPolling={isPolling}  />

@@ -1,0 +1,19 @@
+/* Landscape mode */
+@media only screen and (orientation: landscape) {
+    body {
+        background-color: #aad4ff;
+    }
+    .portrait_only {
+        display: none;
+    }
+}
+
+/* Portrait mode */
+@media only screen and (orientation: portrait) {
+    body {
+        background-color: #aaffd4;
+    }
+    .landscape_only {
+        display: none;
+    }
+}
