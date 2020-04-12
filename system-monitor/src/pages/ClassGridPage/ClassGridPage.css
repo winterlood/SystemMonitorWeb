@@ -17,3 +17,21 @@
         display: none;
     }
 }
+
+.ClassGridPage {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ClassGridPage .pc-grid-wrapper {
+    overflow: hidden;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 5px;
+    padding: 10px;
+    /* box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23); */
+}
+
+.pc-grid-wrapper .pc-grid-item-row {
+    overflow: hidden;
+}

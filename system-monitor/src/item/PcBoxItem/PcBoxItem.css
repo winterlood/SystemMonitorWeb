@@ -1,0 +1,28 @@
+.pc-grid-item-col {
+    float: left;
+
+    padding: 10px;
+}
+
+.pc-grid-item-col .pc-grid-item {
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+
+    background-color: white;
+}
+
+.pc-grid-item-col .on {
+    background-color: green;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+
+.pc-grid-item-col .off {
+    background-color: gray;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+
+.pc-grid-item-col .no-pc {
+    background-color: rgb(245, 245, 245);
+    /* box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23); */
+}

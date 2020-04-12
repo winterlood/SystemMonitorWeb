@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
 const headerStyle = {
     background: "rgba(245, 245, 245, 0.8)",
     boxShadow: "none",
+    height: "40px",
+    overflow: "hiddne",
+    zIndex: "100",
 };
 
 const headerTextStyle = {
