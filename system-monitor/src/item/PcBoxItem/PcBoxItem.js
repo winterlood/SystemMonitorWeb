@@ -1,11 +1,16 @@
 import React from "react";
 import "./PcBoxItem.css";
 
-const PcBoxItem = ({ id, powerStatus, posR, toggle }) => {
+const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData, startTime, endTime }) => {
     const PCStatusBox = () => {
         if (posR) {
             if (powerStatus === "ON" || powerStatus === "On") {
-                return <div onClick={() => toggle(id)} className="pc-grid-item on"></div>;
+                return (
+                    <div
+                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime)}
+                        className="pc-grid-item on"
+                    ></div>
+                );
             } else {
                 return <div className="pc-grid-item off"></div>;
             }

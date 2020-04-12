@@ -35,3 +35,20 @@
 .pc-grid-wrapper .pc-grid-item-row {
     overflow: hidden;
 }
+
+.pc-grid-wrapper .white-board {
+    text-align: center;
+    /* background-color: rgb(180, 180, 180); */
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 5px;
+    height: 20px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 10px;
+    /* box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23); */
+}
+
+.white-board p {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 14px;
+}

@@ -5,6 +5,7 @@ import { getFilteredTime, getFilteredDate, plus30minute } from "util/time";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const PcDetailInfo = ({
+    nowSelectedPc,
     ramData,
     cpuData,
     nowOffButtonRunning,
@@ -71,91 +72,12 @@ const PcDetailInfo = ({
         }
     };
 
-    const GetRamNotice = () => {
-        if (ramData >= 90) {
-            return (
-                <div className="usage-over-90">
-                    <p>PC가 뜨겁습니다!</p>
-                </div>
-            );
-        } else if (ramData >= 70) {
-            return (
-                <div className="usage-over-70">
-                    <p>누군가가 열심히 작업하고 있습니다</p>
-                </div>
-            );
-        } else if (ramData >= 50) {
-            return (
-                <div className="usage-over-50">
-                    <p>과제를 하고있나요?</p>
-                </div>
-            );
-        } else if (ramData >= 30) {
-            return (
-                <div className="usage-over-30">
-                    <p>그렇게 많은 전기세는 안나오겠군요</p>
-                </div>
-            );
-        } else if (ramData >= 10) {
-            return (
-                <div className="usage-over-10">
-                    <p>쓰고있는건가요?</p>
-                </div>
-            );
-        } else {
-            return (
-                <div className="usage-over-0">
-                    <p>정보가 없네요</p>
-                </div>
-            );
-        }
-    };
-
-    const GetCpuNotice = () => {
-        if (cpuData >= 90) {
-            return (
-                <div className="usage-over-90">
-                    <p>PC가 뜨겁습니다!</p>
-                </div>
-            );
-        } else if (cpuData >= 70) {
-            return (
-                <div className="usage-over-70">
-                    <p>누군가가 열심히 작업하고 있습니다</p>
-                </div>
-            );
-        } else if (cpuData >= 50) {
-            return (
-                <div className="usage-over-50">
-                    <p>과제를 하고있나요?</p>
-                </div>
-            );
-        } else if (cpuData >= 30) {
-            return (
-                <div className="usage-over-30">
-                    <p>그렇게 많은 전기세는 안나오겠군요</p>
-                </div>
-            );
-        } else if (cpuData >= 10) {
-            return (
-                <div className="usage-over-10">
-                    <p>쓰고있는건가요?</p>
-                </div>
-            );
-        } else {
-            return (
-                <div className="usage-over-0">
-                    <p>정보가 없네요</p>
-                </div>
-            );
-        }
-    };
     return (
         <div className="PcDetailInfo">
             <div className="pc-detail-body">
                 <div className="pc-detail-time-row">
                     <div class="pc-col-left">
-                        <span id="item">2020년 04월 12일 15시 33분 &nbsp;</span>
+                        <span id="item">{nowSelectedPc.endTime} &nbsp;</span>
                     </div>
                     <div class="pc-col-left">
                         <span id="notice">종료예정&nbsp;</span>
@@ -166,20 +88,20 @@ const PcDetailInfo = ({
                         <span id="notice">CPU사용량&nbsp;</span>
                     </div>
                     <div className="pc-col-right">
-                        <span id="item">86%</span>
+                        <span id="item">{nowSelectedPc.cpuData}%</span>
                     </div>
                 </div>
-                <Progress />
+                <Progress value={nowSelectedPc.cpuData} />
 
                 <div className="pc-detail-usage-row">
                     <div className="pc-col-left">
                         <span id="notice">RAM사용량&nbsp;</span>
                     </div>
                     <div className="pc-col-right">
-                        <span id="item">86%</span>
+                        <span id="item">{nowSelectedPc.ramData}%</span>
                     </div>
                 </div>
-                <Progress />
+                <Progress value={nowSelectedPc.ramData} />
 
                 <div className="pc-detail-control-row">
                     <div className="pc-control-col">
