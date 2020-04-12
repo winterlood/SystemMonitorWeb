@@ -1,3 +1,14 @@
-.modal {
-    z-index: 100;
+.modal-header {
+    padding: 10px !important;
+}
+
+.modal-title {
+    line-height: unset !important;
+}
+
+.modal-header .h5 {
+    font-size: unset !important;
+}
+.modal-header h5 {
+    font-size: unset !important;
 }

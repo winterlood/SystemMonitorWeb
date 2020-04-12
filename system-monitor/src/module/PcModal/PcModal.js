@@ -4,21 +4,22 @@ import "./PcModal.css";
 import PcDetailInfo from "module/PcDetailInfo/PcDetailInfo";
 const PcModal = ({ modal, toggle, id }) => {
     return (
-        <Modal size="lg" style={{ maxWidth: "1600px", width: "90%" }} isOpen={modal} toggle={toggle}>
-            {/* <ModalHeader style={{ maxWidth: "1600px", height: "10px" }} toggle={toggle}>
-                {id}pc
-            </ModalHeader> */}
+        <Modal size="lg" style={{ marginTop: "8px", maxWidth: "1600px", width: "90%" }} isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>
+                <div className="PcDetailInfo">
+                    <div className="pc-detail-header">
+                        <div>
+                            <span id="pc_id">3D-2A-FE-OC-9C&nbsp;</span>
+                            {/* <span id="pc_id_notice">PC </span> */}
+                            <span id="pc-update-date">updated : 2020-04-12-11-11</span>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </ModalHeader>
             <ModalBody>
-                <PcDetailInfo />
+                <PcDetailInfo id={id} />
             </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={toggle}>
-                    Do Something
-                </Button>{" "}
-                <Button color="secondary" onClick={toggle}>
-                    Cancel
-                </Button>
-            </ModalFooter>
         </Modal>
     );
 };

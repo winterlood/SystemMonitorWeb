@@ -2,6 +2,8 @@ import React from "react";
 import "./PcDetailInfo.css";
 import { Spinner, Progress, Button } from "reactstrap";
 import { getFilteredTime, getFilteredDate, plus30minute } from "util/time";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
 const PcDetailInfo = ({
     ramData,
     cpuData,
@@ -150,71 +152,39 @@ const PcDetailInfo = ({
     };
     return (
         <div className="PcDetailInfo">
-            <div className="pc-detail-wrapper">
-                <div className="collapse-item-wrapper">
-                    <div className="collapse-item-box">
-                        <div className="info-text-box">
-                            <p>RAM 실시간 사용량</p>
-                        </div>
-                        <div className="value-text-box">
-                            <span>{ramData}%</span>
-                        </div>
-                        <div className="data-progress-box">
-                            <Progress value={ramData} />
-                        </div>
-                        <div>
-                            <GetRamNotice />
-                        </div>
+            <div className="pc-detail-body">
+                <div className="pc-detail-time-row">
+                    <div class="pc-col-left">
+                        <span id="item">2020년 04월 12일 15시 33분 &nbsp;</span>
+                    </div>
+                    <div class="pc-col-left">
+                        <span id="notice">종료예정&nbsp;</span>
                     </div>
                 </div>
+                <div className="pc-detail-usage-row">
+                    <div className="pc-col-left">
+                        <span id="notice">CPU사용량&nbsp;</span>
+                    </div>
+                    <div className="pc-col-right">
+                        <span id="item">86%</span>
+                    </div>
+                </div>
+                <Progress />
 
-                <div className="collapse-item-wrapper">
-                    <div className="collapse-item-box">
-                        <div className="info-text-box">
-                            <p>CPU 실시간 사용량</p>
-                        </div>
-                        <div className="value-text-box">
-                            <span>{cpuData}%</span>
-                        </div>
-                        <div className="data-progress-box">
-                            <Progress value={cpuData} />
-                        </div>
-                        <div>
-                            <GetCpuNotice />
-                        </div>
+                <div className="pc-detail-usage-row">
+                    <div className="pc-col-left">
+                        <span id="notice">RAM사용량&nbsp;</span>
+                    </div>
+                    <div className="pc-col-right">
+                        <span id="item">86%</span>
                     </div>
                 </div>
+                <Progress />
 
-                <div className="collapse-item-wrapper">
-                    <div className="collapse-item-box">
-                        <div className="info-text-box">
-                            <p>PC 사용 시작 시간</p>
-                        </div>
-                        <div className="value-text-box">
-                            <span>{getFilteredTime(startTime)}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="collapse-item-wrapper">
-                    <div className="collapse-item-box">
-                        <div className="info-text-box">
-                            <p>PC 사용 종료 시간</p>
-                        </div>
-                        <div className="value-text-box">
-                            <span>{getFilteredTime(endTime)}</span>
-                        </div>
-                    </div>
-                </div>
-                <ButtonState />
-                <div className="collapse-item-wrapper">
-                    <div className="collapse-item-box">
-                        <div className="info-text-box">
-                            <p>현재 서버와의 연결 로그</p>
-                        </div>
-                        <div className="value-text-box">
-                            <span>{getFilteredTime(endTime)}</span>
-                        </div>
+                <div className="pc-detail-control-row">
+                    <div className="pc-control-col">
+                        <Button color="danger">PC 종료</Button>
+                        <Button>PC 30분 연장</Button>
                     </div>
                 </div>
             </div>

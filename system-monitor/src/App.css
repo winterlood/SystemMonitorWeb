@@ -17,6 +17,7 @@ a {
     margin-top: 20px;
 }
 #root {
-    height: 100vh;
+    height: auto;
+    padding-bottom: 500px;
     background-color: rgb(245, 245, 245);
 }

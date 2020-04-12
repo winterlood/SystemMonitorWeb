@@ -56,6 +56,72 @@
     text-align: center;
 }
 
+.modal-body {
+    padding: 10px !important;
+}
+
 .PcDetailInfo .data-progress-box {
     margin-bottom: 10px;
+}
+
+.PcDetailInfo .pc-detail-header #pc_id_notice {
+    font-size: 12px;
+    color: rgb(109, 109, 109);
+    font-family: "Roboto Condensed", sans-serif;
+}
+.PcDetailInfo .pc-detail-header #pc-update-date {
+    font-size: 12px;
+    color: rgb(151, 151, 151);
+    font-family: "Roboto Condensed", sans-serif;
+}
+.PcDetailInfo .pc-detail-header #pc_id {
+    font-size: 18px;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.PcDetailInfo .pc-col-left {
+    float: left;
+}
+
+.PcDetailInfo .pc-col-right {
+    float: right;
+}
+.pc-detail-body #notice {
+    font-size: 12px;
+    color: rgb(109, 109, 109);
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.pc-detail-body #item {
+    font-size: 14px;
+    color: rgb(34, 34, 34);
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.pc-detail-body .pc-detail-time-row {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.pc-detail-body .pc-detail-usage-row {
+    overflow: hidden;
+}
+
+.pc-detail-body .pc-detail-time-row #off-remain {
+    font-size: 14px;
+    color: rgb(206, 50, 50);
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.pc-detail-body .progress {
+    margin-bottom: 10px;
+}
+
+.pc-detail-body .pc-control-col {
+    float: right;
+}
+
+.pc-detail-body button {
+    margin-left: 10px;
+    font-size: 14px;
 }
