@@ -38,7 +38,11 @@ const ClassGridPage = ({ match }) => {
                     />
                 );
             });
-            return <div className="pc-grid-item-row">{now}</div>;
+            return (
+                <div className="pc-grid-row-wrapper">
+                    <div className="pc-grid-item-row">{now}</div>
+                </div>
+            );
         });
         console.log(resres);
         return resres;
@@ -62,7 +66,7 @@ const ClassGridPage = ({ match }) => {
                         <p>BOARD</p>
                     </div>
 
-                    <div>
+                    <div className="pc-box-wrapper">
                         <PcGrid />
                     </div>
                 </div>

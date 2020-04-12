@@ -33,9 +33,13 @@
 }
 
 .pc-grid-wrapper .pc-grid-item-row {
-    overflow: hidden;
+    margin: 0 auto;
 }
 
+.pc-grid-row-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
 .pc-grid-wrapper .white-board {
     text-align: center;
     /* background-color: rgb(180, 180, 180); */
@@ -51,4 +55,9 @@
 .white-board p {
     font-family: "Roboto Condensed", sans-serif;
     font-size: 14px;
+}
+
+.ClassGridPage .pc-box-wrapper {
+    width: 100%;
+    text-align: center;
 }
