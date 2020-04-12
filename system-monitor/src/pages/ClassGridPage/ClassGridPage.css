@@ -1,7 +1,7 @@
 /* Landscape mode */
 @media only screen and (orientation: landscape) {
     body {
-        background-color: #aad4ff;
+        background-color: rgb(245, 245, 245);
     }
     .portrait_only {
         display: none;
@@ -11,7 +11,7 @@
 /* Portrait mode */
 @media only screen and (orientation: portrait) {
     body {
-        background-color: #aaffd4;
+        background-color: rgb(245, 245, 245);
     }
     .landscape_only {
         display: none;
