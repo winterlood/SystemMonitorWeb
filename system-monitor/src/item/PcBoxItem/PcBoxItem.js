@@ -1,9 +1,9 @@
 import React from "react";
 import "./PcBoxItem.css";
 
-const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData, startTime, endTime }) => {
+const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData, startTime, endTime, type }) => {
     const PCStatusBox = () => {
-        if (posR) {
+        if (type) {
             if (powerStatus === "ON" || powerStatus === "On") {
                 return (
                     <div

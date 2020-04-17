@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Alert, Container, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./ClassGridPage.css";
 import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import DATA from "json/gridtest";
 import PcModal from "module/PcModal/PcModal";
+import axios from "axios";
 const ClassGridPage = ({ match }) => {
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
-
+    const [grid, setGrid] = useState();
     const toggle = () => setModal(!modal);
     const handleToggleModal = (id, cpuData, ramData, startTime, endTime) => {
         setNowSelectedId(id);
@@ -21,32 +22,44 @@ const ClassGridPage = ({ match }) => {
         });
         toggle();
     };
-    const PcGrid = () => {
-        const resres = DATA.pcs.map((item, index) => {
-            const now = item.map((cur) => {
-                return (
-                    <PcBoxItem
-                        handleToggleModal={handleToggleModal}
-                        id={cur.id}
-                        powerStatus={cur.powerStatus}
-                        posR={cur.posR}
-                        ramData={cur.ramData}
-                        cpuData={cur.cpuData}
-                        endTime={cur.endTime}
-                        startTime={cur.startTime}
-                        endTime={cur.endTime}
-                    />
-                );
+    const getGridData = () => {
+        axios
+            .get("http://13.125.208.19/mobile/class/" + match.params.classId)
+            .then((response) => {
+                const resres = response.data.pcs.map((item, index) => {
+                    const now = item.map((cur) => {
+                        return (
+                            <PcBoxItem
+                                handleToggleModal={handleToggleModal}
+                                id={cur.id}
+                                powerStatus={cur.powerStatus}
+                                posR={cur.posR}
+                                ramData={cur.ramData}
+                                cpuData={cur.cpuData}
+                                endTime={cur.endTime}
+                                startTime={cur.startTime}
+                                endTime={cur.endTime}
+                                type={cur.type}
+                            />
+                        );
+                    });
+                    return (
+                        <div className="pc-grid-row-wrapper">
+                            <div className="pc-grid-item-row">{now}</div>
+                        </div>
+                    );
+                });
+                console.log(resres);
+                setGrid(resres);
+                return resres;
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-            return (
-                <div className="pc-grid-row-wrapper">
-                    <div className="pc-grid-item-row">{now}</div>
-                </div>
-            );
-        });
-        console.log(resres);
-        return resres;
     };
+    useEffect(() => {
+        getGridData();
+    }, [1]);
     return (
         <React.Fragment>
             <PcModal nowSelectedPc={nowSelectedPc} modal={modal} toggle={toggle} />
@@ -66,9 +79,7 @@ const ClassGridPage = ({ match }) => {
                         <p>BOARD</p>
                     </div>
 
-                    <div className="pc-box-wrapper">
-                        <PcGrid />
-                    </div>
+                    <div className="pc-box-wrapper">{grid}</div>
                 </div>
             </div>
         </React.Fragment>

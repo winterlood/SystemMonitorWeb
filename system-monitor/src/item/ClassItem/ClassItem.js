@@ -1,9 +1,8 @@
 import React from "react";
-import { Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./ClassItem.css";
-const ClassItem = () => {
-    const classId = "D404";
+const ClassItem = ({ id, type }) => {
+    const classId = id;
     const classOnCount = "3";
     const classOffCount = "44";
     const updateTime = "2020-04-01-13-24-52";
