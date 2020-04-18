@@ -2,11 +2,13 @@
 
 ![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg) [![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
+> apllo is removed
+
 ```
 npm install --save axios
 ```
 
-> maybe this will replace apollo
+> maybe this will replace apollo 
 
 ```
 npm install --save bootstrap
