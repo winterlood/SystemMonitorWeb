@@ -5,7 +5,8 @@ import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import DATA from "json/gridtest";
 import PcModal from "module/PcModal/PcModal";
 import axios from "axios";
-const ClassGridPage = ({ match }) => {
+const ClassGridPage = ({ location, createNotification }) => {
+    const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
@@ -24,7 +25,7 @@ const ClassGridPage = ({ match }) => {
     };
     const getGridData = () => {
         axios
-            .get("http://13.125.208.19/mobile/class/" + match.params.classId)
+            .get("http://13.125.208.19/mobile/class/" + classId)
             .then((response) => {
                 const resres = response.data.pcs.map((item, index) => {
                     const now = item.map((cur) => {
@@ -62,14 +63,19 @@ const ClassGridPage = ({ match }) => {
     }, [1]);
     return (
         <React.Fragment>
-            <PcModal nowSelectedPc={nowSelectedPc} modal={modal} toggle={toggle} />
+            <PcModal
+                nowSelectedPc={nowSelectedPc}
+                modal={modal}
+                toggle={toggle}
+                createNotification={createNotification}
+            />
 
             {/* 세로모드일 때 표시될 화면 */}
             <Container className="ClassGridPage portrait_only">
                 <Alert color="dark" className="portrait_only">
                     화면을 가로모드로 전환하세요!
                 </Alert>
-                <div>{match.params.classId}</div>
+                <div>{classId}</div>
             </Container>
 
             {/* 가로모드일 때 표시될 화면 */}

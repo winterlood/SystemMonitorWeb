@@ -6,9 +6,11 @@ import { getFilteredDate, plus30minute } from "util/time";
 
 import axios from "axios";
 const PcModal = (props) => {
-    const { nowSelectedPc, modal, toggle, id, ramData, cpuData, endTime, startTime } = props;
+    const { createNotification, nowSelectedPc, modal, toggle, id, ramData, cpuData, endTime, startTime } = props;
     console.log(nowSelectedPc);
-
+    const ShowNotification = (type, title, message) => {
+        createNotification(type, title, message);
+    };
     const DelayPcEndTime = () => {
         var sendTime = getFilteredDate(plus30minute());
         let url = "http://13.125.208.19/mobile/pc/" + nowSelectedPc.id + "/power/" + sendTime + "/";
@@ -24,14 +26,13 @@ const PcModal = (props) => {
             )
             .then((response) => {
                 console.log(response);
-                if (response.data.msg === "true") {
-                    alert("30분 연장되었습니다");
-                }
+                ShowNotification("success", "연장신청", "연장신청에 성공하였습니다");
             })
             .catch((error) => {
                 console.log(error);
                 alert("error!");
             });
+        ShowNotification("success", "연장신청", "연장신청에 성공하였습니다");
     };
     const pcOffEvent = () => {
         this.setState({
@@ -76,6 +77,7 @@ const PcModal = (props) => {
                     <div className="pc-control-col">
                         <Button color="danger">PC 종료</Button>
                         <Button onClick={DelayPcEndTime}>PC 30분 연장</Button>
+                        <Button onClick={createNotification("success", "타이틀임", "메세지임")}>ddd</Button>
                     </div>
                 </div>
             </ModalBody>

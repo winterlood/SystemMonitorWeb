@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ClassItem from "item/ClassItem/ClassItem";
 import axios from "axios";
 
-const ClassViewPage = () => {
+const ClassViewPage = ({ createNotification }) => {
     const [item, setItem] = useState();
     const GetClassItems = () => {
         axios
