@@ -31,6 +31,7 @@ const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
                     const now = item.map((cur) => {
                         return (
                             <PcBoxItem
+                                key={cur.id}
                                 handleToggleModal={handleToggleModal}
                                 id={cur.id}
                                 powerStatus={cur.powerStatus}
@@ -45,7 +46,7 @@ const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
                         );
                     });
                     return (
-                        <div className="pc-grid-row-wrapper">
+                        <div key={"none"} className="pc-grid-row-wrapper">
                             <div className="pc-grid-item-row">{now}</div>
                         </div>
                     );

@@ -60,7 +60,7 @@ const Login = ({ saveLoginState, authenticated, location }) => {
                             </Button>
                         </div>
                         <div className="help-box">
-                            <Link>비밀번호를 잊으셨나요?</Link>
+                            <Link to="/">비밀번호를 잊으셨나요?</Link>
                         </div>
                     </div>
                 </Container>
