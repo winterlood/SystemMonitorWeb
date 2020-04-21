@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ClassItem.css";
-const ClassItem = ({ id, type }) => {
+const ClassItem = ({ id, cntOn, cntOff }) => {
     const classId = id;
-    const classOnCount = "3";
-    const classOffCount = "44";
     const updateTime = "2020-04-01-13-24-52";
     return (
         <Link to={"/class/" + classId}>
@@ -21,13 +19,13 @@ const ClassItem = ({ id, type }) => {
                         <div className="class-on-box-outer">
                             <div className="class-on-inner">
                                 <rect className="class-on-circle"></rect>
-                                {classOnCount}
+                                {cntOn}
                             </div>
                         </div>
                         <div className="class-off-box-outer">
                             <div className="class-off-inner">
                                 <rect className="class-off-circle"></rect>
-                                {classOffCount}
+                                {cntOff}
                             </div>
                         </div>
                     </div>

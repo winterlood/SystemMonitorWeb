@@ -102,13 +102,6 @@ const PcDetailInfo = ({
                     </div>
                 </div>
                 <Progress value={nowSelectedPc.ramData} />
-
-                <div className="pc-detail-control-row">
-                    <div className="pc-control-col">
-                        <Button color="danger">PC 종료</Button>
-                        <Button>PC 30분 연장</Button>
-                    </div>
-                </div>
             </div>
         </div>
     );

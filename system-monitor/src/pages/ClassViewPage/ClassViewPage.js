@@ -13,7 +13,11 @@ const ClassViewPage = () => {
             .then((response) => {
                 console.log(response.data.total);
                 console.log(response.data.classes);
-                setItem(response.data.classes.map(({ id, type }) => <ClassItem key={id} id={id}></ClassItem>));
+                setItem(
+                    response.data.classes.map(({ id, cntOff, cntOn, type }) => (
+                        <ClassItem key={id} id={id} cntOn={cntOn} cntOff={cntOff}></ClassItem>
+                    ))
+                );
             })
             .catch(function (error) {
                 console.log(error);

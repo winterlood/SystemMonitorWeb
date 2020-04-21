@@ -79,9 +79,6 @@ class PcListItem extends Component {
             let today = new Date();
             var sendTime = getFilteredDate(today);
 
-            let form = new FormData();
-            form.append("endTime", sendTime);
-            form.append("powerStatus", "OFF");
             let url = "http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime + "/";
             console.log(url);
 
@@ -101,19 +98,6 @@ class PcListItem extends Component {
                 .catch((error) => {
                     postError();
                 });
-            // axios
-            //     .post("http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime, {
-            //         data: {
-            //             endTime: sendTime,
-            //             powerStatus: "OFF",
-            //         },
-            //     })
-            //     .then(() => {
-            //         reload();
-            //     })
-            //     .catch((error) => {
-            //         postError();
-            //     });
         };
 
         const pcDelay = () => {
