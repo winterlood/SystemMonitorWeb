@@ -61,3 +61,40 @@
     width: 100%;
     text-align: center;
 }
+
+.ClassGridPage .control-row {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    overflow: hidden;
+    font-family: "Roboto Condensed", sans-serif;
+}
+.ClassGridPage .control-row #onCount {
+    padding: 5px;
+    background-color: rgb(45, 116, 45);
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+}
+.ClassGridPage .control-row #offCount {
+    padding: 5px;
+    background-color: rgb(119, 118, 121);
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+}
+.ClassGridPage .control-row #allPcOffButton {
+    padding: 5px;
+    border: 1px solid rgb(151, 42, 42);
+    font-size: 16px;
+    color: rgb(151, 42, 42);
+    float: right;
+    font-family: "Roboto Condensed", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.ClassGridPage .control-row button {
+    float: right !important;
+    font-family: "Roboto Condensed", sans-serif;
+    background-color: rgb(230, 136, 136) !important;
+    border: 1px solid rgb(255, 255, 255) !important;
+}

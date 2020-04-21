@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container } from "reactstrap";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import "./Login.css";
 const Login = ({ saveLoginState, authenticated, location }) => {

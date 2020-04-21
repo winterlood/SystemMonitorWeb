@@ -4,13 +4,17 @@ import "./ClassGridPage.css";
 import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import DATA from "json/gridtest";
 import PcModal from "module/PcModal/PcModal";
+import { getFilteredDate, plus30minute } from "util/time";
 import axios from "axios";
-const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
+const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
     const [grid, setGrid] = useState();
+    const [onPcs, setOnPcs] = useState();
+    const [onCount, setOnCount] = useState();
+    const [offCount, setOffCount] = useState();
     const toggle = () => setModal(!modal);
     const handleToggleModal = (id, cpuData, ramData, startTime, endTime) => {
         setNowSelectedId(id);
@@ -23,10 +27,19 @@ const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
         });
         toggle();
     };
+
     const getGridData = () => {
         axios
             .get("http://13.125.208.19/mobile/class/" + classId)
             .then((response) => {
+                const pcsToArray = response.data.pcs.flat();
+                const nowOnPcs = pcsToArray.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
+                const nowOffPcs = pcsToArray.filter(
+                    (it) => (it.powerStatus === "OFF" || it.powerStatus === "Off") && it.type === "PC"
+                );
+                setOnCount(nowOnPcs.length);
+                setOffCount(nowOffPcs.length);
+                setOnPcs(nowOnPcs);
                 const resres = response.data.pcs.map((item, index) => {
                     const now = item.map((cur) => {
                         return (
@@ -59,6 +72,40 @@ const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
                 console.log(error);
             });
     };
+    const pcOffEvent = (id, sendTime) => {
+        let url = "http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime + "/";
+        axios
+            .post(
+                url,
+                { id: id, endTime: sendTime, powerStatus: "OFF" },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {})
+            .catch((error) => {});
+    };
+    const OffAllPc = () => {
+        let today = new Date();
+        var sendTime = getFilteredDate(today);
+        for (var i = 0; i < onPcs.length; i++) {
+            pcOffEvent(onPcs[i].id, sendTime);
+            console.log(onPcs[i].id);
+        }
+    };
+    useEffect(() => {
+        if (isPolling) {
+            const intervals = setInterval(() => {
+                console.log("polling ~/mobile/class/" + classId);
+                getGridData();
+            }, 5000);
+            return () => clearInterval(intervals);
+        } else {
+            console.log("Polling is stopped");
+        }
+    }, [isPolling]);
     useEffect(() => {
         getGridData();
     }, [1]);
@@ -82,6 +129,14 @@ const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
 
             {/* 가로모드일 때 표시될 화면 */}
             <div className="ClassGridPage landscape_only">
+                <div className="control-row">
+                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
+                    <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
+                    <span id="allPcOffButton">OFF ALL</span>
+                    {/* <Button color="danger" onClick={OffAllPc}>
+                        모든 PC끄기
+                    </Button> */}
+                </div>
                 <div className="pc-grid-wrapper">
                     <div className="white-board">
                         <p>BOARD</p>

@@ -1,8 +1,6 @@
 import React from "react";
 import "./PcDetailInfo.css";
 import { Spinner, Progress, Button } from "reactstrap";
-import { getFilteredTime, getFilteredDate, plus30minute } from "util/time";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const PcDetailInfo = ({
     nowSelectedPc,

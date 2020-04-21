@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Header from "./component/Header/Header";
 import One from "./component/test/One";
-import Two from "./component/test/Two";
 import TotalPc from "./component/TotalPc/TotalPc";
 import Login from "./component/Login/Login";
 import AuthRoute from "./component/AuthRoute/AutheRoute";
@@ -46,12 +45,13 @@ const MyRouter = ({
                             render={(matchProps) => (
                                 <ClassGridPage
                                     {...matchProps}
+                                    isPolling={isPolling}
                                     ShowNotification={ShowNotification}
                                     createNotification={createNotification}
                                 />
                             )}
                         />
-                        <Route path="/class" render={(props) => <ClassViewPage />} />
+                        <Route path="/class" render={(props) => <ClassViewPage isPolling={isPolling} />} />
 
                         {/* <Route  path="/total"
                   render={() =>

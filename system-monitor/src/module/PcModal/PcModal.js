@@ -32,7 +32,7 @@ const PcModal = (props) => {
         axios
             .post(
                 url,
-                { endTime: sendTime },
+                { id: nowSelectedPc.id, endTime: sendTime },
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const PcModal = (props) => {
         axios
             .post(
                 url,
-                { endTime: sendTime, powerStatus: "OFF" },
+                { id: nowSelectedPc.id, endTime: sendTime, powerStatus: "OFF" },
                 {
                     headers: {
                         "Content-Type": "application/json",
