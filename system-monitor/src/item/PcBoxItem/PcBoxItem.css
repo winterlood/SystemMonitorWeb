@@ -46,6 +46,6 @@
 }
 
 .pc-grid-item-col .no-pc {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     /* box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23); */
 }

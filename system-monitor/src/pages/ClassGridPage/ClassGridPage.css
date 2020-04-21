@@ -25,7 +25,7 @@
 
 .ClassGridPage .pc-grid-wrapper {
     overflow: hidden;
-    background-color: rgb(246, 246, 246);
+    background-color: rgb(255, 255, 255);
     border: 1px solid rgb(223, 223, 223);
     border-radius: 5px;
     padding: 10px;
@@ -87,6 +87,16 @@
     border: 1px solid rgb(151, 42, 42);
     font-size: 16px;
     color: rgb(151, 42, 42);
+    float: right;
+    font-family: "Roboto Condensed", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.ClassGridPage .control-row #allPcONButton {
+    padding: 5px;
+    border: 1px solid rgb(45, 116, 45);
+    font-size: 16px;
+    color: rgb(45, 116, 45);
     float: right;
     font-family: "Roboto Condensed", sans-serif;
     border-radius: 5px;

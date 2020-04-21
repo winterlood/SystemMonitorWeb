@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Container, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Alert, Container, Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from "reactstrap";
 import "./ClassGridPage.css";
 import PcBoxItem from "item/PcBoxItem/PcBoxItem";
-import DATA from "json/gridtest";
+
 import PcModal from "module/PcModal/PcModal";
 import { getFilteredDate, plus30minute } from "util/time";
 import axios from "axios";
@@ -94,7 +94,13 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
             pcOffEvent(onPcs[i].id, sendTime);
             console.log(onPcs[i].id);
         }
+        if (onPcs.length === 0) {
+            document.getElementById("warnPcAllOff").click();
+        } else {
+            document.getElementById("infoAllPcOff").click();
+        }
     };
+
     useEffect(() => {
         if (isPolling) {
             const intervals = setInterval(() => {
@@ -132,7 +138,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 <div className="control-row">
                     <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
                     <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="allPcOffButton">OFF ALL</span>
+                    <span id="allPcOffButton" onClick={OffAllPc}>
+                        OFF ALL
+                    </span>
                     {/* <Button color="danger" onClick={OffAllPc}>
                         모든 PC끄기
                     </Button> */}
@@ -145,6 +153,17 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                     <div className="pc-box-wrapper">{grid}</div>
                 </div>
             </div>
+
+            <button
+                id="infoAllPcOff"
+                style={{ display: "none" }}
+                onClick={createNotification("info", "모든PC를 종료했습니다")}
+            ></button>
+            <button
+                id="warnPcAllOff"
+                style={{ display: "none" }}
+                onClick={createNotification("warning", "이미 모두 종료되었습니다")}
+            ></button>
         </React.Fragment>
     );
 };
