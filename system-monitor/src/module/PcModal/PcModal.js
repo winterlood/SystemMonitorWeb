@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./PcModal.css";
 import PcDetailInfo from "module/PcDetailInfo/PcDetailInfo";
@@ -6,11 +6,26 @@ import { getFilteredDate, plus30minute } from "util/time";
 
 import axios from "axios";
 const PcModal = (props) => {
-    const { createNotification, nowSelectedPc, modal, toggle, id, ramData, cpuData, endTime, startTime } = props;
-    console.log(nowSelectedPc);
-    const ShowNotification = (type, title, message) => {
-        createNotification(type, title, message);
-    };
+    const {
+        createNotification,
+        ShowNotification,
+        nowSelectedPc,
+        modal,
+        toggle,
+        id,
+        ramData,
+        cpuData,
+        endTime,
+        startTime,
+    } = props;
+    const [notiFlag, setNotiFlag] = useState(false);
+    useEffect(() => {
+        if (notiFlag === true) {
+            createNotification("success", "타이틀임", "메세지임");
+            setNotiFlag(false);
+        }
+    }, [notiFlag]);
+
     const DelayPcEndTime = () => {
         var sendTime = getFilteredDate(plus30minute());
         let url = "http://13.125.208.19/mobile/pc/" + nowSelectedPc.id + "/power/" + sendTime + "/";
@@ -25,24 +40,19 @@ const PcModal = (props) => {
                 }
             )
             .then((response) => {
-                console.log(response);
-                ShowNotification("success", "연장신청", "연장신청에 성공하였습니다");
+                // setNotiFlag(true);
+                document.getElementById("infoToDelayButton").click();
+                toggle();
             })
             .catch((error) => {
-                console.log(error);
                 alert("error!");
             });
-        ShowNotification("success", "연장신청", "연장신청에 성공하였습니다");
     };
     const pcOffEvent = () => {
-        this.setState({
-            nowOffButtonRunning: true,
-        });
         let today = new Date();
         var sendTime = getFilteredDate(today);
 
         let url = "http://13.125.208.19/mobile/pc/" + nowSelectedPc.id + "/power/" + sendTime + "/";
-        console.log(url);
 
         axios
             .post(
@@ -54,7 +64,10 @@ const PcModal = (props) => {
                     },
                 }
             )
-            .then((response) => {})
+            .then((response) => {
+                document.getElementById("infoToOffButton").click();
+                toggle();
+            })
             .catch((error) => {});
     };
     return (
@@ -75,12 +88,44 @@ const PcModal = (props) => {
                 <PcDetailInfo {...props} />
                 <div className="pc-detail-control-row">
                     <div className="pc-control-col">
-                        <Button color="danger">PC 종료</Button>
+                        <Button color="danger" onClick={pcOffEvent}>
+                            PC 종료
+                        </Button>
                         <Button onClick={DelayPcEndTime}>PC 30분 연장</Button>
-                        <Button onClick={createNotification("success", "타이틀임", "메세지임")}>ddd</Button>
                     </div>
                 </div>
             </ModalBody>
+            <button
+                style={{ display: "none" }}
+                id="successToDelayButton"
+                onClick={createNotification("success", "연장신청", "연장신청에 성공하였습니다")}
+            ></button>
+            <button
+                style={{ display: "none" }}
+                id="infoToDelayButton"
+                onClick={createNotification("info", "연장신청이 완료되었습니다")}
+            ></button>
+            <button
+                style={{ display: "none" }}
+                id="errorToDelayButton"
+                onClick={createNotification("error", "에러가 발생하였습니다")}
+            ></button>
+
+            <button
+                style={{ display: "none" }}
+                id="successToOffButton"
+                onClick={createNotification("success", "연장신청", "연장신청에 성공하였습니다")}
+            ></button>
+            <button
+                style={{ display: "none" }}
+                id="infoToOffButton"
+                onClick={createNotification("info", nowSelectedPc.id + "pc가 종료되었습니다")}
+            ></button>
+            <button
+                style={{ display: "none" }}
+                id="errorToOffButton"
+                onClick={createNotification("error", "에러가 발생하였습니다")}
+            ></button>
         </Modal>
     );
 };

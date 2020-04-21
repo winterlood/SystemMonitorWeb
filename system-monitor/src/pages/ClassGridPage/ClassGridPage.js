@@ -5,7 +5,7 @@ import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import DATA from "json/gridtest";
 import PcModal from "module/PcModal/PcModal";
 import axios from "axios";
-const ClassGridPage = ({ location, createNotification }) => {
+const ClassGridPage = ({ location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
@@ -64,10 +64,11 @@ const ClassGridPage = ({ location, createNotification }) => {
     return (
         <React.Fragment>
             <PcModal
+                createNotification={createNotification}
                 nowSelectedPc={nowSelectedPc}
                 modal={modal}
                 toggle={toggle}
-                createNotification={createNotification}
+                ShowNotification={ShowNotification}
             />
 
             {/* 세로모드일 때 표시될 화면 */}

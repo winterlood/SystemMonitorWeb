@@ -9,7 +9,15 @@ import AuthRoute from "./component/AuthRoute/AutheRoute";
 import ClassViewPage from "pages/ClassViewPage/ClassViewPage";
 import ClassGridPage from "pages/ClassGridPage/ClassGridPage";
 import Header from "module/Header/Header";
-const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePolling, createNotification }) => {
+const MyRouter = ({
+    saveLoginState,
+    user,
+    authenticated,
+    isPolling,
+    handlePolling,
+    ShowNotification,
+    createNotification,
+}) => {
     return (
         <Router>
             {/* <Header isPolling={isPolling} handlePolling={handlePolling}></Header> */}
@@ -36,7 +44,11 @@ const MyRouter = ({ saveLoginState, user, authenticated, isPolling, handlePollin
                         <Route
                             path="/class/:classId"
                             render={(matchProps) => (
-                                <ClassGridPage {...matchProps} createNotification={createNotification} />
+                                <ClassGridPage
+                                    {...matchProps}
+                                    ShowNotification={ShowNotification}
+                                    createNotification={createNotification}
+                                />
                             )}
                         />
                         <Route path="/class" render={(props) => <ClassViewPage />} />

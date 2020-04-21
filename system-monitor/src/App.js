@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import MyRouter from "./MyRouter";
-import NotificationComponent from "util/NotificationComponent";
 import "react-notifications/lib/notifications.css";
 
 import { NotificationContainer, NotificationManager } from "react-notifications";
@@ -30,21 +29,27 @@ class App extends Component {
         return () => {
             switch (type) {
                 case "info":
-                    NotificationManager.info(message);
+                    NotificationManager.info(title);
                     break;
                 case "success":
-                    NotificationManager.success(message, title);
+                    NotificationManager.success(message, title, 1000);
                     break;
                 case "warning":
                     NotificationManager.warning(message, title, 3000);
                     break;
                 case "error":
                     NotificationManager.error(message, title, 5000, () => {
-                        alert("callback");
+                        alert("서버와 통신중 에러가 발생하였습니다");
                     });
-                    break;
+                default:
+                    NotificationManager.error(message, title, 5000, () => {
+                        alert("서버와 통신중 에러가 발생하였습니다");
+                    });
             }
         };
+    };
+    ShowNotification = (type, title, message) => {
+        this.createNotification(type, title, message);
     };
     render() {
         const saveLoginState = (email) => {
@@ -73,6 +78,7 @@ class App extends Component {
 
                 <MyRouter
                     createNotification={this.createNotification}
+                    ShowNotification={this.ShowNotification}
                     authenticated={this.state.authenticated}
                     saveLoginState={saveLoginState}
                     logout={logout}
