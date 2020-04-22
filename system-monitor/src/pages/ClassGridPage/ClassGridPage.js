@@ -144,12 +144,15 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                         모든 PC끄기
                     </Button> */}
                 </div>
-                <div className="pc-grid-wrapper">
+                <div
+                    onClick={createNotification("warning", "세로모드는 지원하지 않습니다")}
+                    className="pc-grid-wrapper"
+                >
                     <div className="white-board">
                         <p>BOARD</p>
                     </div>
 
-                    <div className="pc-box-wrapper">{grid}</div>
+                    <div className="pc-box-wrapper disable">{grid}</div>
                 </div>
             </Container>
 
