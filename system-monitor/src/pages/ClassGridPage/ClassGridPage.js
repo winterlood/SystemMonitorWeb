@@ -6,12 +6,15 @@ import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import PcModal from "module/PcModal/PcModal";
 import { getFilteredDate, plus30minute } from "util/time";
 import axios from "axios";
+
+import Loading from "component/Loading/Loading";
+
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
-    const [grid, setGrid] = useState();
+    const [grid, setGrid] = useState(Loading);
     const [onPcs, setOnPcs] = useState();
     const [onCount, setOnCount] = useState();
     const [offCount, setOffCount] = useState();
