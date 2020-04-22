@@ -5,8 +5,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ClassItem from "item/ClassItem/ClassItem";
 import axios from "axios";
 
+// components
+import ServerError from "component/ServerError/ServerError";
+import Loading from "component/Loading/Loading";
+
 const ClassViewPage = ({ isPolling }) => {
-    const [item, setItem] = useState();
+    const [item, setItem] = useState(Loading);
 
     const GetClassItems = () => {
         axios
@@ -19,7 +23,9 @@ const ClassViewPage = ({ isPolling }) => {
                 );
             })
             .catch(function (error) {
-                console.log(error);
+                console.log("SERVER ERROR!");
+                const errorItem = <ServerError response={error.response.data} />;
+                setItem(errorItem);
             });
     };
     useEffect(() => {

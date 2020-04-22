@@ -1,0 +1,14 @@
+.ServerError {
+    width: 100%;
+}
+
+.ServerError .error-item {
+}
+
+.ServerError .error-item #error-label {
+    color: gray;
+    font-size: 14px;
+}
+.ServerError .error-item #error-value {
+    font-size: 18px;
+}
