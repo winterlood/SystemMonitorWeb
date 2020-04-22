@@ -134,6 +134,23 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                     화면을 가로모드로 전환하세요!
                 </Alert>
                 <div>{classId}</div>
+                <div className="control-row">
+                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
+                    <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
+                    <span id="allPcOffButton" onClick={OffAllPc}>
+                        OFF ALL
+                    </span>
+                    {/* <Button color="danger" onClick={OffAllPc}>
+                        모든 PC끄기
+                    </Button> */}
+                </div>
+                <div className="pc-grid-wrapper">
+                    <div className="white-board">
+                        <p>BOARD</p>
+                    </div>
+
+                    <div className="pc-box-wrapper">{grid}</div>
+                </div>
             </Container>
 
             {/* 가로모드일 때 표시될 화면 */}
