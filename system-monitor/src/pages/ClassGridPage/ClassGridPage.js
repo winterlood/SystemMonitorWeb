@@ -130,7 +130,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
 
             {/* 세로모드일 때 표시될 화면 */}
             <Container className="ClassGridPage portrait_only">
-                <Alert color="dark" className="portrait_only">
+                <Alert color="danger" className="portrait_only">
                     화면을 가로모드로 전환하세요!
                 </Alert>
                 <div>{classId}</div>
