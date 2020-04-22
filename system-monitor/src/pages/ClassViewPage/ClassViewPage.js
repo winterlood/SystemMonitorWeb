@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "reactstrap";
+import { Container, Alert, Spinner } from "reactstrap";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ClassItem from "item/ClassItem/ClassItem";
@@ -42,10 +42,40 @@ const ClassViewPage = ({ isPolling }) => {
     useEffect(() => {
         GetClassItems();
     }, [1]);
+
+    const RenderPollingState = () => {
+        const smallPaddingStyle = {
+            padding: "5px",
+        };
+        if (isPolling) {
+            return (
+                <Alert style={smallPaddingStyle} color="success">
+                    <div className="polling-state-wrapper">
+                        <div className="text-box">실시간 업데이트 중입니다</div>
+                        <div className="spinner-box">
+                            <Spinner size="sm" color="secondary" />
+                        </div>
+                    </div>
+                </Alert>
+            );
+        } else {
+            return (
+                <Alert style={smallPaddingStyle} color="secondary">
+                    <div className="polling-state-wrapper">
+                        <div className="text-box">실시간 업데이트가 중지되었습니다.</div>
+                        <div className="spinner-box"></div>
+                    </div>
+                </Alert>
+            );
+        }
+    };
     return (
         <React.Fragment>
             <div className="main-wrapper">
-                <Container>{item}</Container>
+                <Container>
+                    <RenderPollingState />
+                    {item}
+                </Container>
             </div>
         </React.Fragment>
     );

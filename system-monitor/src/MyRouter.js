@@ -40,7 +40,8 @@ const MyRouter = ({
                             )}
                         />
                         <Route path="/one" component={One} />
-                        <Route
+                        <AuthRoute
+                            authenticated={authenticated}
                             path="/class/:classId"
                             render={(matchProps) => (
                                 <ClassGridPage
@@ -51,7 +52,11 @@ const MyRouter = ({
                                 />
                             )}
                         />
-                        <Route path="/class" render={(props) => <ClassViewPage isPolling={isPolling} />} />
+                        <AuthRoute
+                            authenticated={authenticated}
+                            path="/class"
+                            render={(props) => <ClassViewPage isPolling={isPolling} />}
+                        />
 
                         {/* <Route  path="/total"
                   render={() =>
