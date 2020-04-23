@@ -53,6 +53,23 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 setOnPcs(nowOnPcs);
                 const resres = response.data.pcs.map((item, index) => {
                     const now = item.map((cur) => {
+                        if (cur.id === "0") {
+                            return (
+                                <PcBoxItem
+                                    key={cur.posR + cur.posC}
+                                    handleToggleModal={handleToggleModal}
+                                    id={cur.id}
+                                    powerStatus={cur.powerStatus}
+                                    posR={cur.posR}
+                                    ramData={cur.ramData}
+                                    cpuData={cur.cpuData}
+                                    endTime={cur.endTime}
+                                    startTime={cur.startTime}
+                                    endTime={cur.endTime}
+                                    type={cur.type}
+                                />
+                            );
+                        }
                         return (
                             <PcBoxItem
                                 key={cur.id}
@@ -70,7 +87,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                         );
                     });
                     return (
-                        <div key={"none"} className="pc-grid-row-wrapper">
+                        <div key={index} className="pc-grid-row-wrapper">
                             <div className="pc-grid-item-row">{now}</div>
                         </div>
                     );
