@@ -7,6 +7,14 @@ import PcModal from "module/PcModal/PcModal";
 import { getFilteredDate, plus30minute } from "util/time";
 import axios from "axios";
 
+import {
+    header,
+    GET_CLASS_PCS,
+    POST_OFF_ONE_PC,
+    POST_DELAY_ONE_PC,
+    POST_OFF_ALL_PC,
+    POST_DELAY_ALL_PC,
+} from "services/url";
 import Loading from "component/Loading/Loading";
 
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
@@ -14,7 +22,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const [modal, setModal] = useState(false);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
-    const [grid, setGrid] = useState(Loading);
+    const [grid, setGrid] = useState();
     const [onPcs, setOnPcs] = useState();
     const [onCount, setOnCount] = useState();
     const [offCount, setOffCount] = useState();
@@ -33,7 +41,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
 
     const getGridData = () => {
         axios
-            .get("http://13.125.208.19/mobile/class/" + classId)
+            .get(GET_CLASS_PCS(classId))
             .then((response) => {
                 const pcsToArray = response.data.pcs.flat();
                 const nowOnPcs = pcsToArray.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
@@ -76,20 +84,35 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
             });
     };
     const pcOffEvent = (id, sendTime) => {
-        let url = "http://13.125.208.19/mobile/pc/" + id + "/power/" + sendTime + "/";
         axios
             .post(
-                url,
+                POST_OFF_ONE_PC,
                 { id: id, endTime: sendTime, powerStatus: "OFF" },
                 {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers: header,
                 }
             )
             .then((response) => {})
             .catch((error) => {});
     };
+
+    const pcAllOff = () => {
+        let today = new Date();
+        var sendTime = getFilteredDate(today);
+        axios
+            .post(
+                POST_OFF_ALL_PC,
+                { classId: classId, type: "CLASS", endTime: sendTime, powerStatus: "OFF" },
+                {
+                    headers: header,
+                }
+            )
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {});
+    };
+
     const OffAllPc = () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
@@ -140,6 +163,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                     <span id="allPcOffButton" onClick={OffAllPc}>
                         OFF ALL
                     </span>
+                    <span id="allPcOffButton" onClick={OffAllPc}>
+                        OFF DELAY
+                    </span>
                     {/* <Button color="danger" onClick={OffAllPc}>
                         모든 PC끄기
                     </Button> */}
@@ -161,7 +187,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 <div className="control-row">
                     <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
                     <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="allPcOffButton" onClick={OffAllPc}>
+                    <span id="allPcOffButton" onClick={pcAllOff}>
                         OFF ALL
                     </span>
                     {/* <Button color="danger" onClick={OffAllPc}>

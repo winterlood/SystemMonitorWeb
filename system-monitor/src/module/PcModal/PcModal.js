@@ -28,7 +28,7 @@ const PcModal = (props) => {
 
     const DelayPcEndTime = () => {
         var sendTime = getFilteredDate(plus30minute());
-        let url = "http://13.125.208.19/mobile/pc/" + nowSelectedPc.id + "/power/" + sendTime + "/";
+        let url = "http://13.125.208.19/mobile/pc/power/";
         axios
             .post(
                 url,
@@ -52,7 +52,7 @@ const PcModal = (props) => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
 
-        let url = "http://13.125.208.19/mobile/pc/" + nowSelectedPc.id + "/power/" + sendTime + "/";
+        let url = "http://13.125.208.19/mobile/pc/power/";
 
         axios
             .post(

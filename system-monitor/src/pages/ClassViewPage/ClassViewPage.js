@@ -9,12 +9,15 @@ import axios from "axios";
 import ServerError from "component/ServerError/ServerError";
 import Loading from "component/Loading/Loading";
 
+//urls
+import { GET_CLASS } from "services/url";
+
 const ClassViewPage = ({ isPolling }) => {
     const [item, setItem] = useState(Loading);
 
     const GetClassItems = () => {
         axios
-            .get("http://13.125.208.19/mobile/class")
+            .get(GET_CLASS)
             .then((response) => {
                 setItem(
                     response.data.classes.map(({ id, cntOff, cntOn, type }) => (
