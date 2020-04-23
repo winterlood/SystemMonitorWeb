@@ -16,6 +16,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import { Link } from "react-router-dom";
 
+import "./Header.css";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -101,7 +103,7 @@ export default function Header() {
     };
 
     return (
-        <React.Fragment>
+        <div className="Header">
             <AppBar
                 style={headerStyle}
                 position="fixed"
@@ -164,6 +166,6 @@ export default function Header() {
                     ))} */}
                 </List>
             </Drawer>
-        </React.Fragment>
+        </div>
     );
 }

@@ -1,0 +1,10 @@
+/* Landscape mode */
+@media only screen and (orientation: landscape) {
+}
+
+/* Portrait mode */
+@media only screen and (orientation: portrait) {
+    .Header {
+        display: none;
+    }
+}
