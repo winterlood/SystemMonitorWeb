@@ -1,10 +1,12 @@
 /* Landscape mode */
 @media only screen and (orientation: landscape) {
+    .Header {
+        display: none;
+        height: 0px !important;
+        overflow: hidden;
+    }
 }
 
 /* Portrait mode */
 @media only screen and (orientation: portrait) {
-    .Header {
-        display: none;
-    }
 }

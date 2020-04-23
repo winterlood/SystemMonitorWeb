@@ -27,3 +27,16 @@ a {
     padding-bottom: 30px;
     background-color: rgb(245, 245, 245);
 }
+
+/* Landscape mode */
+@media only screen and (orientation: landscape) {
+    .main {
+        padding-top: 10px !important;
+        min-height: 100vh;
+        height: auto;
+    }
+}
+
+/* Portrait mode */
+@media only screen and (orientation: portrait) {
+}
