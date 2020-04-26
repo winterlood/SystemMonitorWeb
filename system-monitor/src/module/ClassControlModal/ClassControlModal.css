@@ -1,0 +1,43 @@
+.ClassControlModal {
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+}
+
+.ClassControlModal .modal-header {
+    text-align: center;
+}
+
+.ClassControlModal .item-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ClassControlModal .offheader {
+    color: rgb(202, 92, 64);
+}
+
+.ClassControlModal .delayheader {
+    color: rgb(92, 83, 221);
+}
+
+.ClassControlModal .item-label {
+    color: rgb(80, 80, 80);
+    font-size: 14px;
+}
+.ClassControlModal .item-action {
+    margin-top: 5px;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ClassControlModal .offaction {
+    background-color: rgb(209, 99, 99);
+}
+
+.ClassControlModal .delayaction {
+    background-color: rgb(1, 81, 255);
+}

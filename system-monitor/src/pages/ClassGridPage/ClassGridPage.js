@@ -6,7 +6,7 @@ import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 import PcModal from "module/PcModal/PcModal";
 import { getFilteredDate, plus30minute } from "util/time";
 import axios from "axios";
-
+import ClassControlModal from "module/ClassControlModal/ClassControlModal";
 import {
     header,
     GET_CLASS_PCS,
@@ -15,11 +15,15 @@ import {
     POST_OFF_ALL_PC,
     POST_DELAY_ALL_PC,
 } from "services/url";
+
+import MenuIcon from "@material-ui/icons/Menu";
 import Loading from "component/Loading/Loading";
 
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
+    const [ccmodal, setCcomdal] = useState(true);
+
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
     const [grid, setGrid] = useState();
@@ -27,6 +31,8 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const [onCount, setOnCount] = useState();
     const [offCount, setOffCount] = useState();
     const toggle = () => setModal(!modal);
+    const toggleCcModal = () => setCcomdal(!ccmodal);
+
     const handleToggleModal = (id, cpuData, ramData, startTime, endTime) => {
         setNowSelectedId(id);
         setNowSelectedPc({
@@ -160,6 +166,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     }, [1]);
     return (
         <React.Fragment>
+            <ClassControlModal pcAllOff={pcAllOff} ccmodal={ccmodal} toggle={toggleCcModal} classId={classId} />
             <PcModal
                 createNotification={createNotification}
                 nowSelectedPc={nowSelectedPc}
@@ -173,16 +180,24 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 <Alert color="danger" className="portrait_only">
                     화면을 가로모드로 전환하세요!
                 </Alert>
-                <div>{classId}</div>
                 <div className="control-row">
-                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
-                    <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="allPcOffButton" onClick={OffAllPc}>
-                        OFF ALL
+                    <span id="classId">{classId}</span>
+                    &nbsp; &nbsp; &nbsp;
+                    <span id="onlight">&nbsp;</span>
+                    <span id="CountValue">{onCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="offlight">&nbsp;</span>
+                    <span id="CountValue">{offCount}</span>
+                    {/* <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
+                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp; */}
+                    <span id="controlMenuButton" onClick={toggleCcModal}>
+                        <span id="controlMenuLabel"> 전체제어</span> <MenuIcon />
+                    </span>
+                    {/* <span id="allPcOffButton" onClick={OffAllPc}>
+                        <MenuIcon />
                     </span>
                     <span id="allPcOffButton" onClick={OffAllPc}>
                         OFF DELAY
-                    </span>
+                    </span> */}
                     {/* <Button color="danger" onClick={OffAllPc}>
                         모든 PC끄기
                     </Button> */}
@@ -202,11 +217,23 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
             {/* 가로모드일 때 표시될 화면 */}
             <div className="ClassGridPage landscape_only">
                 <div className="control-row">
-                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp;
-                    <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="allPcOffButton" onClick={pcAllOff}>
-                        OFF ALL
+                    <span id="classId">{classId}</span>
+                    &nbsp; &nbsp; &nbsp;
+                    <span id="onlight">&nbsp;</span>
+                    <span id="CountValue">{onCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="offlight">&nbsp;</span>
+                    <span id="CountValue">{offCount}</span>
+                    {/* <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
+                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp; */}
+                    <span id="controlMenuButton" onClick={toggleCcModal}>
+                        <span id="controlMenuLabel"> 전체제어</span> <MenuIcon />
                     </span>
+                    {/* <span id="allPcOffButton" onClick={OffAllPc}>
+                        전체 종료
+                    </span>
+                    <span id="allPcOffButton" onClick={OffAllPc}>
+                        OFF DELAY
+                    </span> */}
                     {/* <Button color="danger" onClick={OffAllPc}>
                         모든 PC끄기
                     </Button> */}

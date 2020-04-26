@@ -68,6 +68,46 @@
     overflow: hidden;
     font-family: "Roboto Condensed", sans-serif;
 }
+.ClassGridPage .control-row #classId {
+    /* padding: 5px; */
+    /* background-color: rgb(45, 116, 45); */
+    font-size: 20px;
+    color: Black;
+    border-radius: 5px;
+}
+.ClassGridPage .control-row #onlight {
+    padding: 5px;
+    background-color: rgb(145, 219, 145);
+    font-size: 16px;
+    color: white;
+    vertical-align: middle;
+    /* line-height: 2px; */
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.ClassGridPage .control-row #offlight {
+    padding: 5px;
+    background-color: rgb(141, 141, 141);
+    font-size: 16px;
+    color: white;
+    vertical-align: middle;
+    /* line-height: 2px; */
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.ClassGridPage .control-row #CountValue {
+    padding: 5px;
+    font-size: 19px;
+    color: rgb(47, 47, 47);
+    vertical-align: middle;
+    /* line-height: 2px; */
+
+    border-radius: 50%;
+}
 .ClassGridPage .control-row #onCount {
     padding: 5px;
     background-color: rgb(45, 116, 45);
@@ -82,6 +122,17 @@
     color: white;
     border-radius: 5px;
 }
+
+.ClassGridPage #controlMenuButton {
+    float: right;
+    cursor: pointer;
+}
+
+#controlMenuButton #controlMenuLabel {
+    font-size: 12px;
+    color: gray;
+}
+
 .ClassGridPage .control-row #allPcOffButton {
     padding: 5px;
     border: 1px solid rgb(151, 42, 42);
