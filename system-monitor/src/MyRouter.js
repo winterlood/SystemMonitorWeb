@@ -8,6 +8,7 @@ import AuthRoute from "./component/AuthRoute/AutheRoute";
 import ClassViewPage from "pages/ClassViewPage/ClassViewPage";
 import ClassGridPage from "pages/ClassGridPage/ClassGridPage";
 import Header from "module/Header/Header";
+import IndexPage from "pages/IndexPage/IndexPage";
 const MyRouter = ({
     saveLoginState,
     user,
@@ -57,7 +58,12 @@ const MyRouter = ({
                             path="/class"
                             render={(props) => <ClassViewPage isPolling={isPolling} />}
                         />
-
+                        <Route
+                            path="/"
+                            render={(props) => (
+                                <IndexPage authenticated={authenticated} saveLoginState={saveLoginState} {...props} />
+                            )}
+                        />
                         {/* <Route  path="/total"
                   render={() =>
                       <TotalPc isPolling={isPolling}  />
