@@ -122,18 +122,23 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const pcAllOff = () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
-        axios
-            .post(
-                POST_OFF_ALL_PC,
-                { classId: classId, type: "CLASS", endTime: sendTime, powerStatus: "OFF" },
-                {
-                    headers: header,
-                }
-            )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {});
+        if (onPcs.length === 0) {
+            document.getElementById("warnPcAllOff").click();
+        } else {
+            axios
+                .post(
+                    POST_OFF_ALL_PC,
+                    { classId: classId, type: "CLASS", endTime: sendTime, powerStatus: "OFF" },
+                    {
+                        headers: header,
+                    }
+                )
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {});
+            document.getElementById("infoAllPcOff").click();
+        }
     };
 
     const OffAllPc = () => {
