@@ -22,7 +22,7 @@ import Loading from "component/Loading/Loading";
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
-    const [ccmodal, setCcomdal] = useState(true);
+    const [ccmodal, setCcomdal] = useState(false);
 
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});

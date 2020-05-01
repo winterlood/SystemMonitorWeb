@@ -17,14 +17,27 @@
     -->
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <script type="text/javascript">
-            $(document).ready(function () {
-                $(document).bind("keydown", function (e) {
-                    if (e.keyCode == 123 /* F12 */) {
-                        e.preventDefault();
-                        e.returnValue = false;
-                    }
-                });
-            });
+            document.onkeypress = function (event) {
+                event = event || window.event;
+                if (event.keyCode == 123) {
+                    //alert('No F-12');
+                    return false;
+                }
+            };
+            document.onmousedown = function (event) {
+                event = event || window.event;
+                if (event.keyCode == 123) {
+                    //alert('No F-keys');
+                    return false;
+                }
+            };
+            document.onkeydown = function (event) {
+                event = event || window.event;
+                if (event.keyCode == 123) {
+                    //alert('No F-keys');
+                    return false;
+                }
+            };
         </script>
         <!--
       Notice the use of %PUBLIC_URL% in the tags above.
