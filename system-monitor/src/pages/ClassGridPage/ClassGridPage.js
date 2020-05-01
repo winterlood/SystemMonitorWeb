@@ -32,6 +32,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const [offCount, setOffCount] = useState();
     const toggle = () => setModal(!modal);
     const toggleCcModal = () => setCcomdal(!ccmodal);
+    const ddd = "dd";
     const handleToggleModal = (id, cpuData, ramData, startTime, endTime) => {
         setNowSelectedId(id);
         setNowSelectedPc({
