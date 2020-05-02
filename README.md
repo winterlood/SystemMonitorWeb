@@ -2,13 +2,13 @@
 
 ![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg) [![HitCount](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb.svg)](http://hits.dwyl.com/winterlood/repo/SystemMonitorWeb)
 
+**보안상의 이유로 URL은 공개하지 않습니다**
+
 >  apllo is removed
 
 ```
 npm install --save axios
 ```
-
-> maybe this will replace apollo 
 
 ```
 npm install --save bootstrap
