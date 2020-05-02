@@ -10,8 +10,6 @@
 npm install --save axios
 ```
 
-> maybe this will replace apollo 
-
 ```
 npm install --save bootstrap
 
