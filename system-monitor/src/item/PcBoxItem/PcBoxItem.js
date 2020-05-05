@@ -12,7 +12,13 @@ const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData,
                     ></div>
                 );
             } else {
-                return <div className="pc-grid-item off"></div>;
+                // return <div className="pc-grid-item off"></div>;
+                return (
+                    <div
+                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime)}
+                        className="pc-grid-item off"
+                    ></div>
+                );
             }
         } else {
             return <div className="pc-grid-item no-pc"></div>;
