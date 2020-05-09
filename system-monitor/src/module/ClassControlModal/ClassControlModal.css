@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.ClassControlModal .item-header {
+/* .ClassControlModal .item-header {
     font-size: 18px;
     font-weight: bold;
 }
@@ -40,4 +40,85 @@
 
 .ClassControlModal .delayaction {
     background-color: rgb(1, 81, 255);
+} */
+
+.ClassControlModal .modal-body {
+}
+
+.ClassControlModal .modal-body .body-col {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 280px;
+}
+
+.ClassControlModal .modal-body .landscape_only .body-col .off-btn,
+.delay-btn {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+
+.ClassControlModal .modal-body .landscape_only .body-col .off-btn {
+    /* padding-top: 25%;
+    padding-bottom: 25%; */
+    background-color: rgb(197, 16, 16);
+    color: white;
+    height: 100%;
+    line-height: 230px;
+    /* vertical-align: middle; */
+}
+
+.landscape_only .body-col .landscape_only .delay-wrapper {
+    border-radius: 5px;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid rgb(219, 219, 219);
+    box-shadow: 0 1px 3px rgba(189, 189, 189, 0.16), 0 3px 6px rgba(187, 187, 187, 0.23);
+}
+
+.ClassControlModal .modal-body .landscape_only .body-col .delay-btn {
+    margin: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: rgb(10, 71, 141);
+    color: white;
+}
+
+.ClassControlModal .modal-body .landscape_only .body-col .date-pick {
+    overflow: hidden;
+
+    margin-bottom: 10px;
+}
+
+.landscape_only .date-pick .date {
+    float: left;
+    width: 50%;
+    padding: 5px;
+    font-size: 23px;
+}
+
+.landscape_only .date-pick .on {
+    height: 100%;
+    background: white;
+    /* border: 1px solid gray;
+    border-bottom: none; */
+    /* border-bottom: 2px solid blue; */
+}
+
+.landscape_only .date-pick .off {
+    background: rgb(224, 224, 224);
+}
+
+.landscape_only .date-picker {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.landscape_only #time-label {
+    margin-top: 20px;
+    font-size: 14px;
 }

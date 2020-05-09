@@ -22,7 +22,7 @@ import Loading from "component/Loading/Loading";
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
     const [modal, setModal] = useState(false);
-    const [ccmodal, setCcomdal] = useState(false);
+    const [ccmodal, setCcomdal] = useState(true);
     const [nowSelectedId, setNowSelectedId] = useState();
     const [nowSelectedPc, setNowSelectedPc] = useState({});
     const [grid, setGrid] = useState();
@@ -31,7 +31,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const [offCount, setOffCount] = useState();
     const toggle = () => setModal(!modal);
     const toggleCcModal = () => setCcomdal(!ccmodal);
-    const handleToggleModal = (id, cpuData, ramData, startTime, endTime) => {
+    const handleToggleModal = (id, cpuData, ramData, startTime, endTime, powerStatus) => {
         setNowSelectedId(id);
         setNowSelectedPc({
             id: id,
@@ -39,6 +39,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
             ramData: ramData,
             startTime: startTime,
             endTime: endTime,
+            powerStatus: powerStatus,
         });
         toggle();
     };
@@ -120,7 +121,6 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     const pcAllOff = () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
-        var nowUrl = "https://www.22hours.online/mobile/class/" + classId + "/power";
         if (onPcs.length === 0) {
             document.getElementById("warnPcAllOff").click();
         } else {
@@ -139,8 +139,27 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 .catch((error) => {});
             document.getElementById("infoAllPcOff").click();
         }
+        toggleCcModal();
     };
+    const pcAllDelay = (sendTime) => {
+        let today = new Date();
 
+        axios
+            .post(
+                POST_DELAY_ALL_PC,
+                // nowUrl,
+                { id: classId, type: "CLASS", endTime: sendTime, powerStatus: "ON" },
+                {
+                    headers: header,
+                }
+            )
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {});
+        document.getElementById("infoAllPcDelay").click();
+        toggleCcModal();
+    };
     const OffAllPc = () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
@@ -171,7 +190,13 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
     }, [1]);
     return (
         <React.Fragment>
-            <ClassControlModal pcAllOff={pcAllOff} ccmodal={ccmodal} toggle={toggleCcModal} classId={classId} />
+            <ClassControlModal
+                pcAllOff={pcAllOff}
+                pcAllDelay={pcAllDelay}
+                ccmodal={ccmodal}
+                toggle={toggleCcModal}
+                classId={classId}
+            />
             <PcModal
                 createNotification={createNotification}
                 nowSelectedPc={nowSelectedPc}
@@ -261,6 +286,11 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                 id="warnPcAllOff"
                 style={{ display: "none" }}
                 onClick={createNotification("warning", "이미 모두 종료되었습니다")}
+            ></button>
+            <button
+                id="infoAllPcDelay"
+                style={{ display: "none" }}
+                onClick={createNotification("info", "모든PC의 종료시간이 업데이트 되었습니다")}
             ></button>
         </React.Fragment>
     );

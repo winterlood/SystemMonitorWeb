@@ -121,7 +121,7 @@ export default function Header() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <span style={headerTextStyle} variant="h6" noWrap>
+                    <span style={headerTextStyle} variant="h6">
                         SYSTEM MONITOR
                     </span>
                 </Toolbar>

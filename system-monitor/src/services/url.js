@@ -6,6 +6,9 @@ const GET_CLASS = "https://www.22hours.online/mobile/class";
 
 const GET_CLASS_PCS = (classId) => "https://www.22hours.online/mobile/class/" + classId;
 
+const POST_LOGIN = "https://www.22hours.online/mobile/login";
+// powerStatus : "OFF" 추가 할 것
+
 const POST_OFF_ONE_PC = "https://www.22hours.online/mobile/pc/power/";
 // powerStatus : "OFF" 추가 할 것
 
@@ -32,6 +35,7 @@ export {
     GET_TOTAL_PCS,
     GET_CLASS,
     GET_CLASS_PCS,
+    POST_LOGIN,
     POST_OFF_ONE_PC,
     POST_DELAY_ONE_PC,
     POST_OFF_ALL_PC,

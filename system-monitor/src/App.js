@@ -4,6 +4,9 @@ import MyRouter from "./MyRouter";
 import "react-notifications/lib/notifications.css";
 
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import Axios from "axios";
+
+import { POST_LOGIN } from "services/url";
 
 class App extends Component {
     constructor(props) {
@@ -53,6 +56,8 @@ class App extends Component {
     };
     render() {
         const saveLoginState = (email) => {
+            Axios.post(POST_LOGIN, {});
+
             this.setState({
                 user: email,
                 authenticated: true,

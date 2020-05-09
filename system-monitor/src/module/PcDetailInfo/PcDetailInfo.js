@@ -78,7 +78,7 @@ const PcDetailInfo = ({
                         <span id="item">{nowSelectedPc.endTime} &nbsp;</span>
                     </div>
                     <div class="pc-col-left">
-                        <span id="notice">종료예정&nbsp;</span>
+                        <span id="notice">{nowSelectedPc.powerStatus === "ON" ? "종료예정" : "종료되었음"}&nbsp;</span>
                     </div>
                 </div>
                 <div className="pc-detail-usage-row">

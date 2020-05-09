@@ -1,45 +1,181 @@
-import React from "react";
+import React, { Component } from "react";
 import "./ClassControlModal.css";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-const ClassControlModal = ({ pcAllOff, ccmodal, toggle, classId }) => {
-    const pcAllOffAction = () => {
-        pcAllOff();
-        toggle();
-    };
-    const pcAllDelayAction = () => {
-        toggle();
-    };
-    return (
-        <Modal
-            className="ClassControlModal"
-            size="lg"
-            style={{ marginTop: "8px", maxWidth: "1600px", width: "90%" }}
-            isOpen={ccmodal}
-            toggle={toggle}
-        >
-            <ModalHeader className="modal-header" toggle={toggle}>
-                {classId} 전체 제어
-            </ModalHeader>
-            <ModalBody>
-                <div className="item-header offheader">전체 종료</div>
-                <div className="item-label">{classId}의 전체 PC를 현재시간부로 종료합니다</div>
-                <div className="item-label"> 사용자가 저장하지 않은 모든 기록은 손실되며, 복구 할 수 없습니다</div>
-
-                <div className="item-action offaction" onClick={pcAllOffAction}>
-                    {classId}의 PC 전체종료하기
-                </div>
-                <br />
-                <br />
-                <div className="item-header delayheader">전체 연장</div>
-                <div className="item-label">{classId}의 전체 PC의 종료예정시간을 늦춥니다</div>
-                <div className="item-label"> 현재 시간부로 30분 늦춰지며, 30분뒤에는 종료됩니다</div>
-                <div className="item-action delayaction" onClick={pcAllDelayAction}>
-                    {classId}의 PC 전체 연장하기
-                </div>
-                <br />
-            </ModalBody>
-        </Modal>
-    );
+import { getFilteredDate, getSelectedTime, getFilteredTime } from "util/time";
+import { Button, Modal, ModalHeader, ModalBody, Input } from "reactstrap";
+const DatePicker = ({ date, handleChangeSeletedTime }) => {
+    if (date === "today") {
+        return (
+            <Input type="select" onChange={({ target: { value } }) => handleChangeSeletedTime(value)}>
+                <MakeTodayTimeOptions />
+            </Input>
+        );
+        //  onChange={({ target: { value } }) => setId(value)}
+    } else {
+        return (
+            <Input type="select" onChange={({ target: { value } }) => handleChangeSeletedTime(value)}>
+                <MakeTommorowTimeOptions />
+            </Input>
+        );
+    }
 };
+
+const MakeTodayTimeOptions = () => {
+    var today = new Date();
+    var stHour = today.getHours();
+    var nowMinute = today.getMinutes();
+    var timeList = new Array();
+    if (nowMinute >= 30) {
+        stHour += 1;
+    }
+    for (var i = stHour; ; i++) {
+        if (i != stHour) timeList.push(i + "-00");
+
+        if (i === 24) {
+            console.log("Break!");
+            break;
+        }
+        timeList.push(i + "-30");
+    }
+    return timeList.map((it) => <option>{it}</option>);
+};
+const MakeTommorowTimeOptions = () => {
+    var stHour = new String("00");
+    var timeList = new Array();
+    for (var i = stHour; ; i++) {
+        if (i < 10 && i != "00") i = "0" + i;
+        if (i === 24) {
+            console.log("Break!");
+            break;
+        }
+        timeList.push(i + "-00");
+
+        timeList.push(i + "-30");
+    }
+    return timeList.map((it) => <option>{it}</option>);
+};
+
+class ClassControlModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: "today",
+            selectedFullTime: null,
+            selectedTime: null,
+        };
+    }
+    componentWillMount() {
+        const initTime = getFilteredDate(new Date());
+        console.log(initTime);
+        this.setState({
+            ...this.state,
+            // selectedTime :
+            selectedFullTime: initTime,
+        });
+    }
+
+    handleChangeSeletedTime = (time) => {
+        this.setState({
+            ...this.state,
+            selectedTime: time,
+            selectedFullTime: getSelectedTime(this.state.date, new Date(), time),
+        });
+    };
+
+    render() {
+        const { pcAllOff, ccmodal, toggle, classId, pcAllDelay } = this.props;
+        const { date, selectedTime, selectedFullTime } = this.state;
+        const pcAllOffAction = () => {
+            pcAllOff();
+            toggle();
+        };
+        const pcAllDelayAction = () => {
+            toggle();
+        };
+
+        return (
+            <Modal
+                className="ClassControlModal"
+                size="lg"
+                style={{ maxWidth: "1600px", marginLeft: "10px", marginRight: "10px" }}
+                isOpen={ccmodal}
+                toggle={toggle}
+            >
+                {/* <ModalHeader className="modal-header" toggle={toggle}>
+                {classId} 전체 제어
+            </ModalHeader> */}
+                <ModalBody>
+                    <div className="modal-body landscape_only">
+                        <div className="body-col">
+                            <div className="off-btn" onClick={() => pcAllOffAction()}>
+                                전체 종료
+                            </div>
+                        </div>
+                        <div className="body-col">
+                            <div className="delay-wrapper">
+                                <div className="date-pick">
+                                    <div
+                                        className={"date " + (date === "today" ? "on" : "off")}
+                                        onClick={() => this.setState({ date: "today" })}
+                                    >
+                                        오늘
+                                    </div>
+                                    <div
+                                        className={"date " + (date === "tommorow" ? "on" : "off")}
+                                        onClick={() => this.setState({ date: "tommorow" })}
+                                    >
+                                        내일
+                                    </div>
+                                </div>
+                                <div className="date-picker">
+                                    <DatePicker date={date} handleChangeSeletedTime={this.handleChangeSeletedTime} />
+                                </div>
+                                <span id="time-label">연장 적용 시간 ( 꼭 확인해 주세요 )</span>
+                                <br />
+                                {getFilteredTime(selectedFullTime)}
+                                <div className="delay-btn" onClick={() => pcAllDelay(selectedFullTime)}>
+                                    전체 연장
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="modal-body portrait_only">
+                        <div className="body-row">
+                            <div className="off-btn" onClick={() => pcAllOffAction()}>
+                                전체 종료
+                            </div>
+                        </div>
+                        <div className="body-row">
+                            <div className="delay-wrapper">
+                                <div className="date-pick">
+                                    <div
+                                        className={"date " + (date === "today" ? "on" : "off")}
+                                        onClick={() => this.setState({ date: "today" })}
+                                    >
+                                        오늘
+                                    </div>
+                                    <div
+                                        className={"date " + (date === "tommorow" ? "on" : "off")}
+                                        onClick={() => this.setState({ date: "tommorow" })}
+                                    >
+                                        내일
+                                    </div>
+                                </div>
+                                <div className="date-picker">
+                                    <DatePicker date={date} handleChangeSeletedTime={this.handleChangeSeletedTime} />
+                                </div>
+                                <span id="time-label">연장 적용 시간 ( 꼭 확인해 주세요 )</span>
+                                <br />
+                                {getFilteredTime(selectedFullTime)}
+                                <div className="delay-btn" onClick={() => pcAllDelay(selectedFullTime)}>
+                                    전체 연장
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ModalBody>
+            </Modal>
+        );
+    }
+}
 
 export default ClassControlModal;

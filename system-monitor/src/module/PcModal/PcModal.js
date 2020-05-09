@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./PcModal.css";
 import PcDetailInfo from "module/PcDetailInfo/PcDetailInfo";
-import { getFilteredDate, plus30minute } from "util/time";
+import { getFilteredDate, plus30minute, getFilteredTime } from "util/time";
 
 import axios from "axios";
 const PcModal = (props) => {
@@ -71,14 +71,19 @@ const PcModal = (props) => {
             .catch((error) => {});
     };
     return (
-        <Modal size="lg" style={{ marginTop: "8px", maxWidth: "1600px", width: "90%" }} isOpen={modal} toggle={toggle}>
+        <Modal
+            size="lg"
+            style={{ marginTop: "8px", maxWidth: "1600px", marginLeft: "10px", marginRight: "10px" }}
+            isOpen={modal}
+            toggle={toggle}
+        >
             <ModalHeader toggle={toggle}>
                 <div className="PcDetailInfo">
                     <div className="pc-detail-header">
                         <div>
                             <span id="pc_id">{nowSelectedPc.id}&nbsp;</span>
                             {/* <span id="pc_id_notice">PC </span> */}
-                            <span id="pc-update-date">updated : 2020-04-12-11-11</span>
+                            <span id="pc-update-date">updated : {getFilteredTime(getFilteredDate(new Date()))}</span>
                         </div>
                         <div></div>
                     </div>

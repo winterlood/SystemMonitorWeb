@@ -7,7 +7,7 @@ const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData,
             if (powerStatus === "ON" || powerStatus === "On") {
                 return (
                     <div
-                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime)}
+                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime, powerStatus)}
                         className="pc-grid-item on"
                     ></div>
                 );
@@ -15,7 +15,7 @@ const PcBoxItem = ({ id, powerStatus, posR, handleToggleModal, ramData, cpuData,
                 // return <div className="pc-grid-item off"></div>;
                 return (
                     <div
-                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime)}
+                        onClick={() => handleToggleModal(id, cpuData, ramData, startTime, endTime, powerStatus)}
                         className="pc-grid-item off"
                     ></div>
                 );
