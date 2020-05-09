@@ -41,3 +41,7 @@ a {
 /* Portrait mode */
 @media only screen and (orientation: portrait) {
 }
+
+.none {
+    display: none;
+}

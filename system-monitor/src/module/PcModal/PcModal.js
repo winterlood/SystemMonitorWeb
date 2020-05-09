@@ -91,7 +91,7 @@ const PcModal = (props) => {
             </ModalHeader>
             <ModalBody>
                 <PcDetailInfo {...props} />
-                <div className="pc-detail-control-row">
+                <div className={"pc-detail-control-row " + (nowSelectedPc.powerStatus === "ON" ? "on" : "none")}>
                     <div className="pc-control-col">
                         <Button color="danger" onClick={pcOffEvent}>
                             PC 종료

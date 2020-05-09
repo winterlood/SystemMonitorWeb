@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./ClassControlModal.css";
 import { getFilteredDate, getSelectedTime, getFilteredTime } from "util/time";
 import { Button, Modal, ModalHeader, ModalBody, Input } from "reactstrap";
+
+import OfflineBoltIcon from "@material-ui/icons/OfflineBolt";
 const DatePicker = ({ date, handleChangeSeletedTime }) => {
     if (date === "today") {
         return (
@@ -104,34 +106,50 @@ class ClassControlModal extends Component {
                 {classId} 전체 제어
             </ModalHeader> */}
                 <ModalBody>
+                    <div id="class-id">{classId}</div>
                     <div className="modal-body landscape_only">
                         <div className="body-col">
-                            <div className="off-btn" onClick={() => pcAllOffAction()}>
-                                전체 종료
+                            <div className="off-wrapper">
+                                <div className="item-wrapper">
+                                    <div className="off-icon-box">
+                                        <OfflineBoltIcon style={{ color: "red", fontSize: "80px" }} />
+                                        <br />
+                                        PC전체 전원 종료
+                                    </div>
+                                </div>
+                                <div className="off-btn" onClick={() => pcAllOffAction()}>
+                                    전체 종료
+                                </div>
                             </div>
                         </div>
                         <div className="body-col">
+                            {/* <div className="delay-wrapper"></div> */}
                             <div className="delay-wrapper">
-                                <div className="date-pick">
-                                    <div
-                                        className={"date " + (date === "today" ? "on" : "off")}
-                                        onClick={() => this.setState({ date: "today" })}
-                                    >
-                                        오늘
+                                <div className="item-wrapper">
+                                    <div className="date-pick">
+                                        <div
+                                            className={"date " + (date === "today" ? "on" : "off")}
+                                            onClick={() => this.setState({ date: "today" })}
+                                        >
+                                            오늘
+                                        </div>
+                                        <div
+                                            className={"date " + (date === "tommorow" ? "on" : "off")}
+                                            onClick={() => this.setState({ date: "tommorow" })}
+                                        >
+                                            내일
+                                        </div>
                                     </div>
-                                    <div
-                                        className={"date " + (date === "tommorow" ? "on" : "off")}
-                                        onClick={() => this.setState({ date: "tommorow" })}
-                                    >
-                                        내일
+                                    <div className="date-picker">
+                                        <DatePicker
+                                            date={date}
+                                            handleChangeSeletedTime={this.handleChangeSeletedTime}
+                                        />
                                     </div>
+                                    <span id="time-label">연장 적용 시간 ( 꼭 확인해 주세요 )</span>
+                                    <br />
+                                    {getFilteredTime(selectedFullTime)}
                                 </div>
-                                <div className="date-picker">
-                                    <DatePicker date={date} handleChangeSeletedTime={this.handleChangeSeletedTime} />
-                                </div>
-                                <span id="time-label">연장 적용 시간 ( 꼭 확인해 주세요 )</span>
-                                <br />
-                                {getFilteredTime(selectedFullTime)}
                                 <div className="delay-btn" onClick={() => pcAllDelay(selectedFullTime)}>
                                     전체 연장
                                 </div>
@@ -139,12 +157,12 @@ class ClassControlModal extends Component {
                         </div>
                     </div>
                     <div className="modal-body portrait_only">
-                        <div className="body-row">
+                        <div className="body-col">
                             <div className="off-btn" onClick={() => pcAllOffAction()}>
                                 전체 종료
                             </div>
                         </div>
-                        <div className="body-row">
+                        <div className="body-col">
                             <div className="delay-wrapper">
                                 <div className="date-pick">
                                     <div

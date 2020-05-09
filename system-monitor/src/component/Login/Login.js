@@ -50,7 +50,7 @@ const Login = ({ saveLoginState, authenticated, location }) => {
                                 onClick={() => {
                                     if (id.length < 1) return;
                                     if (pw.length < 1) return;
-                                    saveLoginState(id);
+                                    saveLoginState(id, pw);
                                 }}
                                 variant="contained"
                                 color="primary"

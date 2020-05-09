@@ -6,7 +6,7 @@ import "react-notifications/lib/notifications.css";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 import Axios from "axios";
 
-import { POST_LOGIN } from "services/url";
+import { header, POST_LOGIN } from "services/url";
 
 class App extends Component {
     constructor(props) {
@@ -55,14 +55,20 @@ class App extends Component {
         this.createNotification(type, title, message);
     };
     render() {
-        const saveLoginState = (email) => {
-            Axios.post(POST_LOGIN, {});
+        const saveLoginState = (id, pw) => {
+            Axios.post(POST_LOGIN, { id: id, pw: pw }, { header: header })
+                .then((response) => {
+                    alert("login success");
+                })
+                .catch((error) => {
+                    alert("error");
+                });
 
             this.setState({
-                user: email,
+                user: id,
                 authenticated: true,
             });
-            window.sessionStorage.setItem("user", email);
+            window.sessionStorage.setItem("user", id);
             window.sessionStorage.setItem("auth", true);
         };
         const logout = () => {

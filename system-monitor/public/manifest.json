@@ -8,19 +8,19 @@
             "type": "image/x-icon"
         },
         {
-            "src": "icon-256.png",
+            "src": "favicon.ico",
             "type": "image/png",
             "sizes": "256x256"
         },
         {
-            "src": "icon512.png",
+            "src": "favicon.ico",
             "type": "image/png",
             "sizes": "512x512"
         }
     ],
     "lang": "en-US",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
 }
