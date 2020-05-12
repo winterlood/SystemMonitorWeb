@@ -4,7 +4,6 @@
 
 **보안상의 이유로 URL은 공개하지 않습니다**
 
->  apllo is removed
 
 ```
 npm install --save axios
