@@ -10,12 +10,13 @@ import ServerError from "component/ServerError/ServerError";
 import Loading from "component/Loading/Loading";
 
 //urls
-import { GET_CLASS } from "services/url";
+import { GET_CLASS, GET } from "services/rest";
 
 const ClassViewPage = ({ isPolling }) => {
     const [item, setItem] = useState(Loading);
 
-    const GetClassItems = () => {
+    const GetClassItems = async () => {
+        GET();
         axios
             .get(GET_CLASS)
             .then((response) => {

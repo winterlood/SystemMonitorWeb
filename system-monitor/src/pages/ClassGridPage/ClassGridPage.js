@@ -14,7 +14,9 @@ import {
     POST_DELAY_ONE_PC,
     POST_OFF_ALL_PC,
     POST_DELAY_ALL_PC,
-} from "services/url";
+    GET,
+    POST,
+} from "services/rest";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import Loading from "component/Loading/Loading";
@@ -43,135 +45,98 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         });
         toggle();
     };
-    const get = "ddd";
-    const getGridData = () => {
-        axios
-            .get(GET_CLASS_PCS(classId))
-            .then((response) => {
-                const pcsToArray = response.data.pcs.flat();
-                const nowOnPcs = pcsToArray.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
-                const nowOffPcs = pcsToArray.filter(
-                    (it) => (it.powerStatus === "OFF" || it.powerStatus === "Off") && it.type === "PC"
-                );
-                setOnCount(nowOnPcs.length);
-                setOffCount(nowOffPcs.length);
-                setOnPcs(nowOnPcs);
-                const resres = response.data.pcs.map((item, index) => {
-                    const now = item.map((cur) => {
-                        if (cur.id === "0") {
-                            return (
-                                <PcBoxItem
-                                    key={cur.posR + cur.posC}
-                                    handleToggleModal={handleToggleModal}
-                                    id={cur.id}
-                                    powerStatus={cur.powerStatus}
-                                    posR={cur.posR}
-                                    ramData={cur.ramData}
-                                    cpuData={cur.cpuData}
-                                    endTime={cur.endTime}
-                                    startTime={cur.startTime}
-                                    endTime={cur.endTime}
-                                    type={cur.type}
-                                />
-                            );
-                        }
-                        return (
-                            <PcBoxItem
-                                key={cur.id}
-                                handleToggleModal={handleToggleModal}
-                                id={cur.id}
-                                powerStatus={cur.powerStatus}
-                                posR={cur.posR}
-                                ramData={cur.ramData}
-                                cpuData={cur.cpuData}
-                                endTime={cur.endTime}
-                                startTime={cur.startTime}
-                                endTime={cur.endTime}
-                                type={cur.type}
-                            />
-                        );
-                    });
+
+    const getGridData = async () => {
+        const data = await GET(GET_CLASS_PCS(classId));
+        const pcsToArray = data.pcs.flat();
+        const nowOnPcs = pcsToArray.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
+        const nowOffPcs = pcsToArray.filter(
+            (it) => (it.powerStatus === "OFF" || it.powerStatus === "Off") && it.type === "PC"
+        );
+
+        setOnCount(nowOnPcs.length);
+        setOffCount(nowOffPcs.length);
+        setOnPcs(nowOnPcs);
+        const resres = data.pcs.map((item, index) => {
+            const now = item.map((cur) => {
+                if (cur.id === "0") {
                     return (
-                        <div key={index} className="pc-grid-row-wrapper">
-                            <div className="pc-grid-item-row">{now}</div>
-                        </div>
+                        <PcBoxItem
+                            key={cur.posR + cur.posC}
+                            handleToggleModal={handleToggleModal}
+                            id={cur.id}
+                            powerStatus={cur.powerStatus}
+                            posR={cur.posR}
+                            ramData={cur.ramData}
+                            cpuData={cur.cpuData}
+                            endTime={cur.endTime}
+                            startTime={cur.startTime}
+                            endTime={cur.endTime}
+                            type={cur.type}
+                        />
                     );
-                });
-                console.log(resres);
-                setGrid(resres);
-                return resres;
-            })
-            .catch(function (error) {
-                console.log(error);
+                }
+                return (
+                    <PcBoxItem
+                        key={cur.id}
+                        handleToggleModal={handleToggleModal}
+                        id={cur.id}
+                        powerStatus={cur.powerStatus}
+                        posR={cur.posR}
+                        ramData={cur.ramData}
+                        cpuData={cur.cpuData}
+                        endTime={cur.endTime}
+                        startTime={cur.startTime}
+                        endTime={cur.endTime}
+                        type={cur.type}
+                    />
+                );
             });
-    };
-    const pcOffEvent = (id, sendTime) => {
-        axios
-            .post(
-                POST_OFF_ONE_PC,
-                { id: id, endTime: sendTime, powerStatus: "OFF" },
-                {
-                    headers: header,
-                }
-            )
-            .then((response) => {})
-            .catch((error) => {});
+            return (
+                <div key={index} className="pc-grid-row-wrapper">
+                    <div className="pc-grid-item-row">{now}</div>
+                </div>
+            );
+        });
+        setGrid(resres);
+        return resres;
     };
 
-    const pcAllOff = () => {
+    const pcAllOff = async () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
         if (onPcs.length === 0) {
             document.getElementById("warnPcAllOff").click();
         } else {
-            axios
-                .post(
-                    POST_OFF_ALL_PC,
-                    // nowUrl,
-                    { id: classId, type: "CLASS", endTime: sendTime, powerStatus: "OFF" },
-                    {
-                        headers: header,
-                    }
-                )
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch((error) => {});
-            document.getElementById("infoAllPcOff").click();
+            const data = await POST(POST_OFF_ALL_PC, {
+                id: classId,
+                type: "CLASS",
+                endTime: sendTime,
+                powerStatus: "OFF",
+            });
+            if (data !== null) {
+                document.getElementById("infoAllPcOff").click();
+            } else {
+                alert("Error!");
+            }
         }
         toggleCcModal();
     };
-    const pcAllDelay = (sendTime) => {
-        let today = new Date();
 
-        axios
-            .post(
-                POST_DELAY_ALL_PC,
-                // nowUrl,
-                { id: classId, type: "CLASS", endTime: sendTime, powerStatus: "ON" },
-                {
-                    headers: header,
-                }
-            )
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {});
-        document.getElementById("infoAllPcDelay").click();
-        toggleCcModal();
-    };
-    const OffAllPc = () => {
+    const pcAllDelay = async (sendTime) => {
         let today = new Date();
-        var sendTime = getFilteredDate(today);
-        for (var i = 0; i < onPcs.length; i++) {
-            pcOffEvent(onPcs[i].id, sendTime);
-            console.log(onPcs[i].id);
-        }
-        if (onPcs.length === 0) {
-            document.getElementById("warnPcAllOff").click();
+        const data = await POST(POST_DELAY_ALL_PC, {
+            id: classId,
+            type: "CLASS",
+            endTime: sendTime,
+            powerStatus: "ON",
+        });
+        if (data !== null) {
+            document.getElementById("infoAllPcDelay").click();
         } else {
-            document.getElementById("infoAllPcOff").click();
+            alert("Error!");
         }
+        toggleCcModal();
     };
 
     useEffect(() => {
@@ -186,6 +151,7 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         }
     }, [isPolling]);
     useEffect(() => {
+        // Component Did Mount
         getGridData();
     }, [1]);
     return (
@@ -217,20 +183,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                     <span id="CountValue">{onCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span id="offlight">&nbsp;</span>
                     <span id="CountValue">{offCount}</span>
-                    {/* <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp; */}
                     <span id="controlMenuButton" onClick={toggleCcModal}>
                         <span id="controlMenuLabel"> 전체제어</span> <MenuIcon />
                     </span>
-                    {/* <span id="allPcOffButton" onClick={OffAllPc}>
-                        <MenuIcon />
-                    </span>
-                    <span id="allPcOffButton" onClick={OffAllPc}>
-                        OFF DELAY
-                    </span> */}
-                    {/* <Button color="danger" onClick={OffAllPc}>
-                        모든 PC끄기
-                    </Button> */}
                 </div>
                 <div
                     onClick={createNotification("warning", "세로모드는 지원하지 않습니다")}
@@ -253,20 +208,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
                     <span id="CountValue">{onCount}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span id="offlight">&nbsp;</span>
                     <span id="CountValue">{offCount}</span>
-                    {/* <span id="onCount">ON : {onCount}</span>&nbsp;&nbsp;
-                    <span id="offCount">OFF : {offCount}</span>&nbsp;&nbsp;&nbsp; */}
                     <span id="controlMenuButton" onClick={toggleCcModal}>
                         <span id="controlMenuLabel"> 전체제어</span> <MenuIcon />
                     </span>
-                    {/* <span id="allPcOffButton" onClick={OffAllPc}>
-                        전체 종료
-                    </span>
-                    <span id="allPcOffButton" onClick={OffAllPc}>
-                        OFF DELAY
-                    </span> */}
-                    {/* <Button color="danger" onClick={OffAllPc}>
-                        모든 PC끄기
-                    </Button> */}
                 </div>
                 <div className="pc-grid-wrapper">
                     <div className="white-board">
