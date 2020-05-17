@@ -16,21 +16,18 @@ const ClassViewPage = ({ isPolling }) => {
     const [item, setItem] = useState(Loading);
 
     const GetClassItems = async () => {
-        GET();
-        axios
-            .get(GET_CLASS)
-            .then((response) => {
-                setItem(
-                    response.data.classes.map(({ id, cntOff, cntOn, type }) => (
-                        <ClassItem key={id} id={id} cntOn={cntOn} cntOff={cntOff}></ClassItem>
-                    ))
-                );
-            })
-            .catch(function (error) {
-                console.log("SERVER ERROR!");
-                const errorItem = <ServerError response={error.response.data} />;
-                setItem(errorItem);
-            });
+        const data = await GET(GET_CLASS);
+        if (data !== null) {
+            setItem(
+                data.classes.map(({ id, cntOff, cntOn, type }) => (
+                    <ClassItem key={id} id={id} cntOn={cntOn} cntOff={cntOff}></ClassItem>
+                ))
+            );
+        } else {
+            console.log("SERVER ERROR!");
+            const errorItem = <ServerError response={data} />;
+            setItem(errorItem);
+        }
     };
     useEffect(() => {
         if (isPolling) {

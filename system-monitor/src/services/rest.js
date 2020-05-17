@@ -49,6 +49,7 @@ const GET = (url, data) => {
 };
 
 const POST = (url, data) => {
+    console.log(data);
     return axios({
         method: "POST",
         url: DOMAIN + url,
@@ -58,7 +59,7 @@ const POST = (url, data) => {
         .then((result) => result.data)
         .catch((result) => {
             console.log(result);
-            return null;
+            return data;
         });
 };
 
