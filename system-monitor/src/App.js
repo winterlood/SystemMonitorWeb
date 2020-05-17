@@ -4,9 +4,8 @@ import MyRouter from "./MyRouter";
 import "react-notifications/lib/notifications.css";
 
 import { NotificationContainer, NotificationManager } from "react-notifications";
-import Axios from "axios";
 
-import { header, POST_LOGIN } from "services/url";
+import { POST_LOGIN, POST } from "services/rest";
 
 class App extends Component {
     constructor(props) {
@@ -55,22 +54,26 @@ class App extends Component {
         this.createNotification(type, title, message);
     };
     render() {
-        const saveLoginState = (id, pw) => {
-            Axios.post(POST_LOGIN, { id: id, pw: pw }, { header: header })
-                .then((response) => {
-                    alert("login success");
-                })
-                .catch((error) => {
-                    alert("error");
+        ///////////////////////////////////////////////////////////////////
+        //                                                               //
+        //          AJAX                                                 //
+        const saveLoginState = async (id, pw) => {
+            const result = await POST(POST_LOGIN, { id: id, pw: pw });
+            if (result) {
+                console.log(result);
+                this.setState({
+                    user: id,
+                    authenticated: true,
                 });
-
-            this.setState({
-                user: id,
-                authenticated: true,
-            });
-            window.sessionStorage.setItem("user", id);
-            window.sessionStorage.setItem("auth", true);
+                window.sessionStorage.setItem("user", id);
+                window.sessionStorage.setItem("auth", true);
+            } else {
+                alert("No!");
+            }
         };
+        //                                                              //
+        //                                                              //
+        //////////////////////////////////////////////////////////////////
         const logout = () => {
             this.setState({
                 user: null,

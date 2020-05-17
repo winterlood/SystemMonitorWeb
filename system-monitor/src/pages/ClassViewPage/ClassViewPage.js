@@ -10,27 +10,35 @@ import ServerError from "component/ServerError/ServerError";
 import Loading from "component/Loading/Loading";
 
 //urls
-import { GET_CLASS } from "services/url";
+import { GET_CLASS, GET } from "services/rest";
 
 const ClassViewPage = ({ isPolling }) => {
     const [item, setItem] = useState(Loading);
 
-    const GetClassItems = () => {
-        axios
-            .get(GET_CLASS)
-            .then((response) => {
-                setItem(
-                    response.data.classes.map(({ id, cntOff, cntOn, type }) => (
-                        <ClassItem key={id} id={id} cntOn={cntOn} cntOff={cntOff}></ClassItem>
-                    ))
-                );
-            })
-            .catch(function (error) {
-                console.log("SERVER ERROR!");
-                const errorItem = <ServerError response={error.response.data} />;
-                setItem(errorItem);
-            });
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          AJAX                                                 //
+    const GetClassItems = async () => {
+        const data = await GET(GET_CLASS);
+        if (data !== null) {
+            setItem(
+                data.classes.map(({ id, cntOff, cntOn, type }) => (
+                    <ClassItem key={id} id={id} cntOn={cntOn} cntOff={cntOff}></ClassItem>
+                ))
+            );
+        } else {
+            console.log("SERVER ERROR!");
+            const errorItem = <ServerError response={data} />;
+            setItem(errorItem);
+        }
     };
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          LIFE CYCLE                                           //
     useEffect(() => {
         if (isPolling) {
             const intervals = setInterval(() => {
@@ -45,6 +53,9 @@ const ClassViewPage = ({ isPolling }) => {
     useEffect(() => {
         GetClassItems();
     }, [1]);
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
 
     const RenderPollingState = () => {
         const smallPaddingStyle = {
@@ -72,6 +83,7 @@ const ClassViewPage = ({ isPolling }) => {
             );
         }
     };
+
     return (
         <React.Fragment>
             <div className="main-wrapper">

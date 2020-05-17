@@ -11,7 +11,6 @@ const DatePicker = ({ date, handleChangeSeletedTime }) => {
                 <MakeTodayTimeOptions />
             </Input>
         );
-        //  onChange={({ target: { value } }) => setId(value)}
     } else {
         return (
             <Input type="select" onChange={({ target: { value } }) => handleChangeSeletedTime(value)}>
@@ -70,7 +69,6 @@ class ClassControlModal extends Component {
         console.log(initTime);
         this.setState({
             ...this.state,
-            // selectedTime :
             selectedFullTime: initTime,
         });
     }
@@ -102,9 +100,6 @@ class ClassControlModal extends Component {
                 isOpen={ccmodal}
                 toggle={toggle}
             >
-                {/* <ModalHeader className="modal-header" toggle={toggle}>
-                {classId} 전체 제어
-            </ModalHeader> */}
                 <ModalBody>
                     <div id="class-id">{classId}</div>
                     <div className="modal-body landscape_only">
@@ -123,7 +118,6 @@ class ClassControlModal extends Component {
                             </div>
                         </div>
                         <div className="body-col">
-                            {/* <div className="delay-wrapper"></div> */}
                             <div className="delay-wrapper">
                                 <div className="item-wrapper">
                                     <div className="date-pick">
