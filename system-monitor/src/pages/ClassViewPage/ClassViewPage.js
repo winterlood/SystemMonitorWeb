@@ -15,6 +15,9 @@ import { GET_CLASS, GET } from "services/rest";
 const ClassViewPage = ({ isPolling }) => {
     const [item, setItem] = useState(Loading);
 
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          AJAX                                                 //
     const GetClassItems = async () => {
         const data = await GET(GET_CLASS);
         if (data !== null) {
@@ -29,6 +32,13 @@ const ClassViewPage = ({ isPolling }) => {
             setItem(errorItem);
         }
     };
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          LIFE CYCLE                                           //
     useEffect(() => {
         if (isPolling) {
             const intervals = setInterval(() => {
@@ -43,6 +53,9 @@ const ClassViewPage = ({ isPolling }) => {
     useEffect(() => {
         GetClassItems();
     }, [1]);
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
 
     const RenderPollingState = () => {
         const smallPaddingStyle = {
@@ -70,6 +83,7 @@ const ClassViewPage = ({ isPolling }) => {
             );
         }
     };
+
     return (
         <React.Fragment>
             <div className="main-wrapper">

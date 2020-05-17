@@ -11,8 +11,6 @@ const PcsProvider = ({ isPolling, handlePolling, children }) => {
         axios
             .get("http://13.125.208.19/mobile/pc")
             .then((response) => {
-                // console.log(response);
-                // console.log(response.data.pcs);
                 var pcsData = response.data.pcs;
                 const filterOn = pcsData.filter((it) => it.powerStatus === "ON" || it.powerStatus === "On");
                 setOnPcs(

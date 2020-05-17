@@ -35,6 +35,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         toggle();
     };
 
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          AJAX                                                 //
     const getGridData = async () => {
         const data = await GET(GET_CLASS_PCS(classId));
         const pcsToArray = data.pcs.flat();
@@ -99,6 +102,13 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         }
         toggleCcModal();
     };
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          LIFE CYCLE                                           //
 
     useEffect(() => {
         if (isPolling) {
@@ -115,6 +125,11 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         // Component Did Mount
         getGridData();
     }, [1]);
+
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
+
     return (
         <React.Fragment>
             <ClassControlModal

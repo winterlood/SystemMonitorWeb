@@ -19,13 +19,10 @@ const PcModal = (props) => {
         startTime,
     } = props;
     const [notiFlag, setNotiFlag] = useState(false);
-    useEffect(() => {
-        if (notiFlag === true) {
-            createNotification("success", "타이틀임", "메세지임");
-            setNotiFlag(false);
-        }
-    }, [notiFlag]);
 
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          AJAX                                                 //
     const HandleDelayButtonClick = async () => {
         var sendTime = getFilteredDate(plus30minute());
         const data = await POST(POST_DELAY_ONE_PC, { id: nowSelectedPc.id, endTime: sendTime });
@@ -36,6 +33,7 @@ const PcModal = (props) => {
             alert("error!");
         }
     };
+
     const HandleOffButtonClick = async () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
@@ -47,6 +45,23 @@ const PcModal = (props) => {
             alert("error!");
         }
     };
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //                                                               //
+    //          LIFE CYCLE                                           //
+    useEffect(() => {
+        if (notiFlag === true) {
+            createNotification("success", "타이틀임", "메세지임");
+            setNotiFlag(false);
+        }
+    }, [notiFlag]);
+
+    //                                                              //
+    //                                                              //
+    //////////////////////////////////////////////////////////////////
     return (
         <Modal
             size="lg"

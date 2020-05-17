@@ -54,6 +54,9 @@ class App extends Component {
         this.createNotification(type, title, message);
     };
     render() {
+        ///////////////////////////////////////////////////////////////////
+        //                                                               //
+        //          AJAX                                                 //
         const saveLoginState = async (id, pw) => {
             const result = await POST(POST_LOGIN, { id: id, pw: pw });
             if (result) {
@@ -68,6 +71,9 @@ class App extends Component {
                 alert("No!");
             }
         };
+        //                                                              //
+        //                                                              //
+        //////////////////////////////////////////////////////////////////
         const logout = () => {
             this.setState({
                 user: null,

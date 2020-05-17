@@ -20,7 +20,6 @@ const MyRouter = ({
 }) => {
     return (
         <Router>
-            {/* <Header isPolling={isPolling} handlePolling={handlePolling}></Header> */}
             <div className="main">
                 <Header />
 
@@ -64,10 +63,6 @@ const MyRouter = ({
                                 <IndexPage authenticated={authenticated} saveLoginState={saveLoginState} {...props} />
                             )}
                         />
-                        {/* <Route  path="/total"
-                  render={() =>
-                      <TotalPc isPolling={isPolling}  />
-                  }/> */}
                     </Switch>
                 </div>
             </div>
