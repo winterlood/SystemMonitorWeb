@@ -48,27 +48,27 @@ const PcDetailInfo = ({
         }
     };
 
-    const ButtonState = () => {
-        if (nowDelayButtonRunning || nowOffButtonRunning) {
-            return (
-                <div>
-                    현재 서버와 통신중입니다....
-                    <Spinner size="sm" color="secondary" />
-                </div>
-            );
-        } else {
-            return (
-                <React.Fragment>
-                    <div className="collapse-item-wrapper">
-                        <DelayButtonState />
-                    </div>
-                    <div className="collapse-item-wrapper">
-                        <OffButtonState />
-                    </div>
-                </React.Fragment>
-            );
-        }
-    };
+    // const ButtonState = () => {
+    //     if (nowDelayButtonRunning || nowOffButtonRunning) {
+    //         return (
+    //             <div>
+    //                 현재 서버와 통신중입니다....
+    //                 <Spinner size="sm" color="secondary" />
+    //             </div>
+    //         );
+    //     } else {
+    //         return (
+    //             <React.Fragment>
+    //                 <div className="collapse-item-wrapper">
+    //                     <DelayButtonState />
+    //                 </div>
+    //                 <div className="collapse-item-wrapper">
+    //                     <OffButtonState />
+    //                 </div>
+    //             </React.Fragment>
+    //         );
+    //     }
+    // };
 
     return (
         <div className="PcDetailInfo">

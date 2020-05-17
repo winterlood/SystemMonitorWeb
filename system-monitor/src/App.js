@@ -4,7 +4,6 @@ import MyRouter from "./MyRouter";
 import "react-notifications/lib/notifications.css";
 
 import { NotificationContainer, NotificationManager } from "react-notifications";
-import Axios from "axios";
 
 import { POST_LOGIN, POST } from "services/rest";
 

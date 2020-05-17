@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./PcModal.css";
 import PcDetailInfo from "module/PcDetailInfo/PcDetailInfo";
 import { getFilteredDate, plus30minute, getFilteredTime } from "util/time";
-
+import { POST_DELAY_ONE_PC, POST_OFF_ONE_PC, POST } from "services/rest";
 import axios from "axios";
 const PcModal = (props) => {
     const {
@@ -26,49 +26,26 @@ const PcModal = (props) => {
         }
     }, [notiFlag]);
 
-    const DelayPcEndTime = () => {
+    const HandleDelayButtonClick = async () => {
         var sendTime = getFilteredDate(plus30minute());
-        let url = "http://13.125.208.19/mobile/pc/power/";
-        axios
-            .post(
-                url,
-                { id: nowSelectedPc.id, endTime: sendTime },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            )
-            .then((response) => {
-                // setNotiFlag(true);
-                document.getElementById("infoToDelayButton").click();
-                toggle();
-            })
-            .catch((error) => {
-                alert("error!");
-            });
+        const data = await POST(POST_DELAY_ONE_PC, { id: nowSelectedPc.id, endTime: sendTime });
+        if (data !== null) {
+            document.getElementById("infoToDelayButton").click();
+            toggle();
+        } else {
+            alert("error!");
+        }
     };
-    const pcOffEvent = () => {
+    const HandleOffButtonClick = async () => {
         let today = new Date();
         var sendTime = getFilteredDate(today);
-
-        let url = "http://13.125.208.19/mobile/pc/power/";
-
-        axios
-            .post(
-                url,
-                { id: nowSelectedPc.id, endTime: sendTime, powerStatus: "OFF" },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            )
-            .then((response) => {
-                document.getElementById("infoToOffButton").click();
-                toggle();
-            })
-            .catch((error) => {});
+        const data = await POST(POST_OFF_ONE_PC, { id: nowSelectedPc.id, endTime: sendTime, powerStatus: "OFF" });
+        if (data != null) {
+            document.getElementById("infoToOffButton").click();
+            toggle();
+        } else {
+            alert("error!");
+        }
     };
     return (
         <Modal
@@ -82,7 +59,6 @@ const PcModal = (props) => {
                     <div className="pc-detail-header">
                         <div>
                             <span id="pc_id">{nowSelectedPc.id}&nbsp;</span>
-                            {/* <span id="pc_id_notice">PC </span> */}
                             <span id="pc-update-date">updated : {getFilteredTime(getFilteredDate(new Date()))}</span>
                         </div>
                         <div></div>
@@ -93,10 +69,10 @@ const PcModal = (props) => {
                 <PcDetailInfo {...props} />
                 <div className={"pc-detail-control-row " + (nowSelectedPc.powerStatus === "ON" ? "on" : "none")}>
                     <div className="pc-control-col">
-                        <Button color="danger" onClick={pcOffEvent}>
+                        <Button color="danger" onClick={HandleOffButtonClick}>
                             PC 종료
                         </Button>
-                        <Button onClick={DelayPcEndTime}>PC 30분 연장</Button>
+                        <Button onClick={HandleDelayButtonClick}>PC 30분 연장</Button>
                     </div>
                 </div>
             </ModalBody>

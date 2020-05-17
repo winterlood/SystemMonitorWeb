@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Container, Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from "reactstrap";
+import { Alert, Container } from "reactstrap";
 import "./ClassGridPage.css";
 import PcBoxItem from "item/PcBoxItem/PcBoxItem";
 
 import PcModal from "module/PcModal/PcModal";
-import { getFilteredDate, plus30minute } from "util/time";
-import axios from "axios";
+import { getFilteredDate } from "util/time";
 import ClassControlModal from "module/ClassControlModal/ClassControlModal";
-import {
-    header,
-    GET_CLASS_PCS,
-    POST_OFF_ONE_PC,
-    POST_DELAY_ONE_PC,
-    POST_OFF_ALL_PC,
-    POST_DELAY_ALL_PC,
-    GET,
-    POST,
-} from "services/rest";
+import { GET_CLASS_PCS, POST_OFF_ALL_PC, POST_DELAY_ALL_PC, GET, POST } from "services/rest";
 
 import MenuIcon from "@material-ui/icons/Menu";
-import Loading from "component/Loading/Loading";
 
 const ClassGridPage = ({ isPolling, location, ShowNotification, createNotification }) => {
     const [classId, setClassId] = useState(location.pathname.split("/")[2]);
@@ -60,37 +49,9 @@ const ClassGridPage = ({ isPolling, location, ShowNotification, createNotificati
         const resres = data.pcs.map((item, index) => {
             const now = item.map((cur) => {
                 if (cur.id === "0") {
-                    return (
-                        <PcBoxItem
-                            key={cur.posR + cur.posC}
-                            handleToggleModal={handleToggleModal}
-                            id={cur.id}
-                            powerStatus={cur.powerStatus}
-                            posR={cur.posR}
-                            ramData={cur.ramData}
-                            cpuData={cur.cpuData}
-                            endTime={cur.endTime}
-                            startTime={cur.startTime}
-                            endTime={cur.endTime}
-                            type={cur.type}
-                        />
-                    );
+                    return <PcBoxItem key={cur.posR + cur.posC} handleToggleModal={handleToggleModal} {...cur} />;
                 }
-                return (
-                    <PcBoxItem
-                        key={cur.id}
-                        handleToggleModal={handleToggleModal}
-                        id={cur.id}
-                        powerStatus={cur.powerStatus}
-                        posR={cur.posR}
-                        ramData={cur.ramData}
-                        cpuData={cur.cpuData}
-                        endTime={cur.endTime}
-                        startTime={cur.startTime}
-                        endTime={cur.endTime}
-                        type={cur.type}
-                    />
-                );
+                return <PcBoxItem key={cur.id} handleToggleModal={handleToggleModal} {...cur} />;
             });
             return (
                 <div key={index} className="pc-grid-row-wrapper">
